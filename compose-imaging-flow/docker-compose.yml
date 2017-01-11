@@ -24,3 +24,6 @@ services:
     links:
       - slapd:ldap
       - postgres:db
+    volumes:
+      - C:\tmp\storage:/storage
+      - C:\tmp\wildfly:/opt/wildfly/standalone
