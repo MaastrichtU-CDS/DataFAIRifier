@@ -1,0 +1,4 @@
+<script>
+ <p t="PROFILENAME">CAT lookup</p>
+ <e en="T" t="00100020" n="PatientID">@call(catIdLookup,this)</e>
+</script>

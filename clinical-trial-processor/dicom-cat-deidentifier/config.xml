@@ -1,0 +1,44 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8080"/>
+	<Plugin
+		class="nl.maastro.ctp.utils.DatabaseLookupPlugin.LookupPostgres"
+		id="catIdLookup"
+		name="DatabaseLookupCAT"
+		sqlQuery="SELECT patient_id AS replacement FROM key_value WHERE key_value = '##original##';"
+		host="keydb"
+		port="5432"
+		databaseName="key_db"
+		username="ctp_key_db_select"
+		password=""
+		cacheLifetime="300"
+		root="/tmp/roots/LookupPostgres"/>	
+    <Pipeline name="CAT Anonymizer">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="no"
+            name="DICOM Server Import"
+            port="104"
+            quarantine="/tmp/quarantines/DicomImportService"
+            root="/tmp/roots/DicomImportService"/>
+        <CATLookup
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            name="CATLookup"
+            quarantine="/tmp/CTP/quarantines/CAT/CATLookup"
+            root="/tmp/CTP/roots/CAT/CATLookup"
+            script="scripts/CAT/CATLookup.script"/>
+        <CATAnonymizer
+            class="org.rsna.ctp.stdstages.DicomAnonymizer"
+            name="CATAnonymizer"
+            quarantine="/tmp/CTP/quarantines/CAT/CATAnonymizer"
+            root="/tmp/CTP/roots/CAT/CATAnonymizer"
+            script="scripts/CAT/CATAnonymizer.script"/>		
+        <DicomExportService
+            class="org.rsna.ctp.stdstages.DicomExportService"
+            name="DicomExportService"
+            quarantine="/tmp/quarantines/DicomExportService"
+            root="/tmp/roots/DicomExportService"
+            url="dicom://CAT:CTP@pacs:11112"/>
+    </Pipeline>
+</Configuration>
