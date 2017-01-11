@@ -15,7 +15,7 @@ RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y libc6:i
 
 RUN sh install.sh
 
-RUN apt-get remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
+RUN apt-get remove --purge -y $BUILD_PACKAGES && \
     rm -rf /var/lib/apt/lists/*
 
 COPY config.xml $INSTALL_HOME/CTP/
