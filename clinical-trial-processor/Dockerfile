@@ -3,7 +3,7 @@ FROM datafairifier/baseimage
 ENV BUILD_PACKAGES="wget"
 ENV INSTALL_HOME="/opt"
 
-DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 
 WORKDIR /opt
 COPY install.sh install.sh
