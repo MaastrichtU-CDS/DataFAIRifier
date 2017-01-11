@@ -1,5 +1,7 @@
 #
 # This image is built automatically on http://hub.docker.com/datafairifier/ctp-baseimage
+# To create an image based on this one put FROM datafairifier/ctp-baseimage at the top
+# of your dockerfile
 #
 FROM datafairifier/baseimage
 
