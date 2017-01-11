@@ -27,3 +27,10 @@ services:
     volumes:
       - ./storage:/storage
       - ./wildfly:/opt/wildfly/standalone
+  ctp:
+    image: datafairifier/dcd
+    ports:
+        - "9090:8080"
+        - "104:104"
+    links:
+        - dcm4chee-arc:pacs
