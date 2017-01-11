@@ -2,21 +2,17 @@ version: "2"
 services:
   slapd:
     image: dcm4che/slapd-dcm4chee:2.4.40-8.1
-    ports:
-      - "389:389"
     env_file: docker-compose.env
   postgres:
     image: dcm4che/postgres-dcm4chee:9.6-8
-    ports:
-      - "5432:5432"
     env_file: docker-compose.env
   dcm4chee-arc:
     image: dcm4che/dcm4chee-arc-psql:5.8.1
     ports:
       - "8080:8080"
-      - "9990:9990"
-      - "11112:11112"
-      - "2575:2575"
+      # - "9990:9990"
+      # - "11112:11112"
+      # - "2575:2575"
     env_file: docker-compose.env
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
