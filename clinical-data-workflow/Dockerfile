@@ -11,6 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /opt
 
 COPY installPentaho.sh installPentaho.sh
+COPY pdi-ce-7.0.0.0-25.zip pdi-ce-7.0.0.0-25.zip 
 
 # Make sure the file is executable
 RUN chmod +x installPentaho.sh

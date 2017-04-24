@@ -1,5 +1,5 @@
 apt-get update
-apt-get install wget
+apt-get install wget unzip
 
 #download java
 wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-i586.tar.gz
@@ -12,4 +12,7 @@ export JAVA_HOME PATH
 #extract Java
 tar -xzvf jdk-7u79-linux-i586.tar.gz
 
-wget https://sourceforge.net/projects/pentaho/files/Data%20Integration/7.0/pdi-ce-7.0.0.0-25.zip/download
+#wget https://sourceforge.net/projects/pentaho/files/Data%20Integration/7.0/pdi-ce-7.0.0.0-25.zip/download
+
+mkdir -p /opt/pentaho
+unzip pdi-ce-7.0.0.0-25.zip -d /opt/pentaho
