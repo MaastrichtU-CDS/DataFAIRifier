@@ -1,6 +1,6 @@
 cwlVersion: v1.0
 class: CommandLineTool
-baseCommand: /Users/johan/localApps/data-integration/kitchen.sh
+baseCommand: /home/johan/localApps/data-integration/kitchen.sh
 inputs:
     pentaho_script_file:
         type: ["null", File]
