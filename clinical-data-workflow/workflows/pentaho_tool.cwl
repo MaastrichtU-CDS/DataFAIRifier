@@ -3,7 +3,7 @@ class: CommandLineTool
 baseCommand: /Users/johan/localApps/data-integration/kitchen.sh
 inputs:
     pentaho_script_file:
-        type: string
+        type: ["null", File]
         inputBinding:
             position: 1
             prefix: /file
