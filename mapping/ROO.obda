@@ -1,0 +1,173 @@
+[PrefixDeclaration]
+:		http://www.cancerdata.org/roo/
+dc:		http://purl.org/dc/elements/1.1/
+icd:		http://purl.bioontology.org/ontology/ICD10/
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+xml:		http://www.w3.org/XML/1998/namespace
+xsd:		http://www.w3.org/2001/XMLSchema#
+ncit:		http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+skos:		http://www.w3.org/2004/02/skos/core#
+time:		http://www.w3.org/2006/time#
+metadata:	http://data.bioontology.org/metadata/
+uo:         http://purl.obolibrary.org/obo/.
+
+[SourceDeclaration]
+sourceUri	datasource1
+connectionUrl	jdbc:postgresql://localhost/clinicaldata
+username	postgres
+password	Jaig#5Tk
+driverClass	org.postgresql.Driver
+
+[MappingDeclaration] @collection [[
+mappingId	mapping--1411497522
+target		:patient_{id} a ncit:C16960 . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join--569172054
+target		:patient_{id} :100017 :ageStartRT_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join--1135990792
+target		:patient_{id} :100016 :ageDiagnosis_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join-1877652713
+target		:patient_{id} :100218 :ecog_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join--217982893
+target		:patient_{id} :100301 :rt_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join-37665720
+target		:patient_{id} :100008 :disease_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join-818287024
+target		:patient_{id} :100018 :gender_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-1764899456
+target		:ageStartRtUnit_{id} a <http://purl.obolibrary.org/obo/UO_0000036> ; :100042 {age_at_start_rt} . 
+source		select id, age_at_start_rt from thunder_view
+
+mappingId	mapping--9724031
+target		:ageStartRT_{id} a :100003 ; :100027 :ageStartRtUnit_{id} . 
+source		select id, age_at_start_rt from thunder_view
+
+mappingId	mapping--578195992
+target		:prescribedDose_{id} a :100013 ; :100042 {TotalDose}^^xsd:double . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join-2098029451
+target		:prescribedDose_{id} :100027 :prescribedDoseUnit_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-295390488
+target		:diseaseDateTime_{id} a time:DateTimeDescription ; time:day {day_intake}^^xsd:string ; time:year {year_intake}^^xsd:string ; time:month {month_intake}^^xsd:string . 
+source		select "id", "year_intake", "month_intake", "day_intake" from "public"."thunder_view" where ("Institute" = 1)
+
+mappingId	mapping--846946355
+target		:clinTStage_{id} a <{ct_class}> . 
+source		select id, "ct_class" from "public"."thunder_view" 
+            where "ct_class" is not null
+
+mappingId	mapping--1706360094
+target		:gender_{id} a <{gender_class}> . 
+source		select id, gender_class from "public"."thunder_view" 
+
+mappingId	mapping--1097784930
+target		:ageDiagnosisUnit_{id} a <http://purl.obolibrary.org/obo/UO_0000036> ; :100042 {age_at_diagnosis} . 
+source		select id, age_at_diagnosis from thunder_view where ("Institute" = 1)
+
+mappingId	mapping--465792483
+target		:clinTNM_{id} a ncit:C48881 . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join--1617665254
+target		:clinTNM_{id} :100244 :clinTStage_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join-948055612
+target		:clinTNM_{id} :100242 :clinNStage_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping--1617273301
+target		:clinNStage_{id} a <{cn_class}> . 
+source		select id, "cn_class" from "public"."thunder_view" where "cn_class" is not null
+
+mappingId	mapping--689652294
+target		:rt_{id} a ncit:C15313 . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join--482658951
+target		:rt_{id} :100023 :prescribedDose_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-1676504905
+target		:pathTNM_{id} a ncit:C48739 . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join-648595157
+target		:pathTNM_{id} :100286 :pathNStage_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-join-1518587417
+target		:pathTNM_{id} :100288 :pathTStage_{id} . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping-572104274
+target		:patient_{id} a ncit:C16960 ; :100039 <{institute_url}> . 
+source		select id, "institute_url" from "public"."thunder_view" 
+
+mappingId	mapping--1310670729
+target		:disease_{id} a icd:C20 . 
+source		select "id", "year_intake", "month_intake", "day_intake" from "public"."thunder_view" where ("Institute" = 1)
+
+mappingId	mapping-join-1352365174
+target		:disease_{id} :100287 :pathTNM_{id} . 
+source		select "id", "year_intake", "month_intake", "day_intake" from "public"."thunder_view" where ("Institute" = 1)
+
+mappingId	mapping-join--487003479
+target		:disease_{id} :100402 :rt_{id} . 
+source		select "id", "year_intake", "month_intake", "day_intake" from "public"."thunder_view" where ("Institute" = 1)
+
+mappingId	mapping-join-1300215409
+target		:disease_{id} :100041 :diseaseDateTime_{id} . 
+source		select "id", "year_intake", "month_intake", "day_intake" from "public"."thunder_view" where ("Institute" = 1)
+
+mappingId	mapping-join-1608632102
+target		:disease_{id} :100038 :ecog_{id} . 
+source		select "id", "year_intake", "month_intake", "day_intake" from "public"."thunder_view" where ("Institute" = 1)
+
+mappingId	mapping-join--106089933
+target		:disease_{id} :100243 :clinTNM_{id} . 
+source		select "id", "year_intake", "month_intake", "day_intake" from "public"."thunder_view" where ("Institute" = 1)
+
+mappingId	mapping--679634375
+target		:ageDiagnosis_{id} a :100002 ; :100027 :ageDiagnosisUnit_{id} . 
+source		select id, age_at_diagnosis from thunder_view where ("Institute" = 1)
+
+mappingId	mapping-1091297362
+target		:ecog_{id} a <{who_class}> . 
+source		select id, "who_class" from "public"."thunder_view" where "who_class" is not null
+
+mappingId	mapping--499533003
+target		:prescribedDoseUnit_{id} a <http://purl.obolibrary.org/obo/UO_000134> . 
+source		select id from "public"."thunder" 
+
+mappingId	mapping--598504918
+target		:pathTStage_{id} a <{pt_class}> . 
+source		select id, "pt_class" from "public"."thunder_view" where "pt_class" is not null
+
+mappingId	mapping--1729948510
+target		:pathNStage_{id} a <{pn_class}> . 
+source		select id, "pn_class" from "public"."thunder_view" where "pn_class" is not null
+
+mappingId	mapping-join-648595158
+target		:prescribedDoseUnit_{id} a uo:UO_0000134 .
+source		select id from "public"."thunder" 
+]]
+
