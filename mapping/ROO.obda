@@ -154,10 +154,6 @@ mappingId	mapping-1091297362
 target		:ecog_{id} a <{who_class}> . 
 source		select id, "who_class" from "public"."thunder_view" where "who_class" is not null
 
-mappingId	mapping--499533003
-target		:prescribedDoseUnit_{id} a <http://purl.obolibrary.org/obo/UO_000134> . 
-source		select id from "public"."thunder" 
-
 mappingId	mapping--598504918
 target		:pathTStage_{id} a <{pt_class}> . 
 source		select id, "pt_class" from "public"."thunder_view" where "pt_class" is not null
