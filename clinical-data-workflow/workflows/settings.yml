@@ -8,3 +8,8 @@ d2r_mapping_file:
     class: File
     path: registry_mapping.ttl
 verbose: true
+header_in: 'Content-Type: text/turtle'
+turtle_file_in:
+    class: File
+    path: d2r_output.ttl
+sparql_endpoint_url: http://localhost:9999/blazegraph/sparql
