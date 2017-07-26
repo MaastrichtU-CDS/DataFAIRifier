@@ -1,5 +1,5 @@
 base_uri: 'http://johanvansoest.nl/rdf/testCwl/'
-endpoint_url: http://localhost:9999/blazegraph/sparql
+endpoint_url: http://blazegraph:9999/blazegraph/sparql
 ktr_file_location:
     class: File
     path: load_csv_to_db.ktr

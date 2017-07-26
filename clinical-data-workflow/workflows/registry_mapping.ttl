@@ -15,7 +15,7 @@
 
 map:database a d2rq:Database;
 	d2rq:jdbcDriver "org.postgresql.Driver";
-	d2rq:jdbcDSN "jdbc:postgresql://localhost:5432/thunder";
+	d2rq:jdbcDSN "jdbc:postgresql://postgresdb:5432/thunder";
 	d2rq:username "postgres";
 	d2rq:password "postgres";
 	.

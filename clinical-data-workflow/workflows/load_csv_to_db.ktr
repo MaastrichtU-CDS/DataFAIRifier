@@ -437,7 +437,7 @@
   </notepads>
   <connection>
     <name>thunder</name>
-    <server>localhost</server>
+    <server>postgresdb</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>thunder</database>
@@ -477,7 +477,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>&#x2f;mnt&#x2f;c&#x2f;Users&#x2f;johan&#x2f;Documents&#x2f;Repositories&#x2f;RDF&#x2f;DataFAIRifier&#x2f;clinical-data-workflow&#x2f;workflows&#x2f;data&#x2f;thunderSubSet.csv</filename>
+    <filename>&#x2f;data&#x2f;thunderSubSet.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
