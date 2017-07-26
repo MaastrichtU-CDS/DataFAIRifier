@@ -7,3 +7,5 @@ export JAVA_HOME PATH
 
 cd /cwl_scripts
 cwltool workflow.cwl.yml /config/settings_cwl.yml
+
+sleep 1m

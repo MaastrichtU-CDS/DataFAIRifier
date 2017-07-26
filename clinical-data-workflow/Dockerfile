@@ -31,8 +31,7 @@ RUN chmod +x install.sh
 
 RUN sh install.sh
 
-COPY run /run
-RUN chmod +x /run
+COPY run /etc/service/cwl_run/
+RUN chmod +x /etc/service/cwl_run/run
 
 EXPOSE 2020
-CMD ["/run"]
