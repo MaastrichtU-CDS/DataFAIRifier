@@ -1,6 +1,5 @@
 cwlVersion: v1.0
 class: CommandLineTool
-#baseCommand: /home/johan/localApps/data-integration/pan.sh
 baseCommand: /mnt/c/StandAloneLinux/pdi-ce-7.1.0.0-12/data-integration/pan.sh
 #kitchen can be used if you want to run a job. currently we want to run a transformation
 inputs:
