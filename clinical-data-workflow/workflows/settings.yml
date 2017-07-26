@@ -1,15 +1,14 @@
-pentaho_script_file:
+base_uri: 'http://johanvansoest.nl/rdf/testCwl/'
+endpoint_url: http://localhost:9999/blazegraph/sparql
+ktr_file_location:
     class: File
-    path: load_csv_to_db.ktr 
-pentaho_logging_level: /level:Detailed
-pentaho_logfile_location: /logfile:logger.log
-d2r_base_uri: http://johanvansoest.nl/rdf/testCwl/
-d2r_mapping_file:
+    path: load_csv_to_db.ktr
+d2r_mapping:
     class: File
     path: registry_mapping.ttl
-verbose: true
-header_in: 'Content-Type: text/turtle'
-turtle_file_in:
-    class: File
-    path: d2r_output.ttl
-sparql_endpoint_url: http://localhost:9999/blazegraph/sparql
+
+#other (mostly fixed) parameters
+pdi_log_level: /level:Detailed
+pdi_logfile: /logfile:logger.log
+d2r_verbose_output: true
+post_header: 'Content-Type: text/turtle'
