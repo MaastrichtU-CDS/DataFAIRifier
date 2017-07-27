@@ -1,0 +1,14 @@
+base_uri: 'http://johanvansoest.nl/rdf/testCwl/'
+endpoint_url: http://blazegraph:9999/blazegraph/sparql
+ktr_file_location:
+    class: File
+    path: load_csv_to_db.ktr
+d2r_mapping:
+    class: File
+    path: registry_mapping.ttl
+
+#other (mostly fixed) parameters
+pdi_log_level: /level:Detailed
+pdi_logfile: /logfile:logger.log
+d2r_verbose_output: true
+post_header: 'Content-Type: text/turtle'

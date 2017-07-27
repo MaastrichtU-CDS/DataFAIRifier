@@ -1,0 +1,487 @@
+@prefix map: <> .
+@prefix roo:<http://www.cancerdata.org/roo/>.
+@prefix ncit:<http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+@prefix uo: <http://purl.obolibrary.org/obo/>.
+@prefix icd: <http://purl.bioontology.org/ontology/ICD10/>.
+@prefix icdcm: <http://purl.bioontology.org/ontology/ICD10CM/>.
+@prefix time: <http://www.w3.org/2006/time#>.
+@prefix ctcae: <http://ncicb.nci.nih.gov/xml/owl/EVS/ctcae.owl#>.
+@prefix fma: <http://purl.org/sig/ont/fma/>.
+
+map:database a d2rq:Database;
+	d2rq:jdbcDriver "org.postgresql.Driver";
+	d2rq:jdbcDSN "jdbc:postgresql://postgresdb:5432/thunder";
+	d2rq:username "postgres";
+	d2rq:password "postgres";
+	.
+
+# Table patient
+map:patient a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "patient_@@thunderset.id@@";
+	d2rq:class ncit:C16960;
+	.
+	
+map:patient__label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient;
+	d2rq:property rdfs:label;
+	d2rq:pattern "patient #@@thunderset.id@@";
+	d2rq:datatype xsd:String;
+	.
+	
+map:patient_gender_obj a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "gender_@@thunderset.id@@";
+	d2rq:condition "thunderset.gender IS NOT NULL";
+	.
+	
+# Link to the gender object of the NCI thesaurus
+map:patient_gender_uri_obj a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient;
+	d2rq:property roo:100018;
+	d2rq:refersToClassMap map:patient_gender_obj;
+	.
+	
+# Link to the gender object of the NCI thesaurus
+map:patient_gender_uri a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient_gender_obj;
+	d2rq:property rdf:type;
+	d2rq:uriColumn "thunderset.gender";
+	d2rq:translateWith map:genderMapping.
+
+#create mapping between gender and NCI code
+map:genderMapping a d2rq:TranslationTable;
+    d2rq:translation [ d2rq:databaseValue "0"; d2rq:rdfValue ncit:C16576; ];
+	d2rq:translation [ d2rq:databaseValue "1"; d2rq:rdfValue ncit:C20197; ];
+    .
+	
+#create a disease resource for this patient
+map:patient_disease_obj a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "disease_@@thunderset.id@@";
+	d2rq:class icd:C20;
+	.
+	
+# Map the disease to the patient instance
+map:patient_disease_link a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient;
+	d2rq:property roo:100008;
+	d2rq:refersToClassMap map:patient_disease_obj;
+	.
+	
+##########
+#create date object for disease
+map:diseaseDateTime a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "diseaseDateTime_@@thunderset.id@@";
+	d2rq:class time:GeneralDateTimeDescription;
+	d2rq:condition "thunderset.institute = 1";
+	.
+	
+# Map the date to the disease instance
+map:diseaseDateTimeLink a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient_disease_obj;
+	d2rq:property roo:100041;
+	d2rq:refersToClassMap map:diseaseDateTime;
+	.
+
+#add the year
+map:diseaseDateTimeYear a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:diseaseDateTime;
+	d2rq:property time:year;
+	d2rq:sqlExpression "DATE_PART('year', TO_DATE(thunderset.date_intake, 'YYYY-mm-dd'))";
+	d2rq:condition "thunderset.institute = 1";
+	d2rq:datatype xsd:int;
+	.
+	
+#add the month
+map:diseaseDateTimeMonth a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:diseaseDateTime;
+	d2rq:property time:month;
+	d2rq:sqlExpression "DATE_PART('month', TO_DATE(thunderset.date_intake, 'YYYY-mm-dd'))";
+	d2rq:condition "thunderset.institute = 1";
+	d2rq:datatype xsd:int;
+	.
+	
+#add the year
+map:diseaseDateTimeDay a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:diseaseDateTime;
+	d2rq:property time:day;
+	d2rq:sqlExpression "DATE_PART('day', TO_DATE(thunderset.date_intake, 'YYYY-mm-dd'))";
+	d2rq:condition "thunderset.institute = 1";
+	d2rq:datatype xsd:int;
+	.
+	
+############################################
+# Age at start RT
+############################################
+#create an age resource
+map:ageAtStartRTObject a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "ageStartRT_@@thunderset.id@@";
+	d2rq:class roo:100003;				#means age object at start RT
+	.
+	
+# add the unit property to the age resource
+map:ageStartRTUnit a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:ageAtStartRTObject;
+	d2rq:property roo:100027;
+	d2rq:refersToClassMap map:ageAtStartRTObjectUnit;
+	.
+	
+#create an age unit years resource
+map:ageAtStartRTObjectUnit a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "ageStartRtUnit_@@thunderset.id@@";
+	d2rq:class uo:UO_0000036;				#means years
+	.
+	
+#add the value property to the age resource
+map:ageStartRTValue a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:ageAtStartRTObject;
+	d2rq:property roo:100042;
+	d2rq:sqlExpression "CAST((DATE_PART('year', thunderset.ff) - DATE_PART('year', thunderset.dob)) AS integer)";
+	d2rq:datatype xsd:int;
+	.
+	
+#Link the patient resource to the age resource
+map:ageStartRT_patient a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient;
+	d2rq:property roo:100017;
+	d2rq:refersToClassMap map:ageAtStartRTObject;
+	.
+	
+#Link the age resource to the first fraction resource
+#map:ageStartRT_FirstFraction a d2rq:PropertyBridge;
+#	d2rq:belongsToClassMap map:ageAtStartRTObject;
+#	d2rq:property roo:100038;
+#	d2rq:refersToClassMap map:firstFractionResource;
+#	.
+
+############################################
+# Age at diagnosis
+############################################	
+#create an age resource
+map:ageAtDiagnosisObject a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "ageDiagnosis_@@thunderset.id@@";
+	d2rq:class roo:100002;				#means age object at diagnosis
+	d2rq:condition "thunderset.institute = 1";
+	.
+	
+# add the unit property to the age resource
+map:ageAtDiagnosisUnit a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:ageAtDiagnosisObject;
+	d2rq:property roo:100027;
+	d2rq:refersToClassMap map:ageAtDiagnosisObjectUnit;
+	.
+	
+#create an age unit years resource
+map:ageAtDiagnosisObjectUnit a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "ageDiagnosisUnit_@@thunderset.id@@";
+	d2rq:class uo:UO_0000036;				#means years
+	.
+	
+#add the value property to the age resource
+map:ageDiagnosisValue a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:ageAtDiagnosisObject;
+	d2rq:property roo:100042;
+	d2rq:sqlExpression "CAST((DATE_PART('year', TO_DATE(thunderset.date_intake, 'YYYY-mm-dd')) - DATE_PART('year', thunderset.dob)) AS integer)";
+	d2rq:condition "thunderset.institute = 1";
+	d2rq:datatype xsd:int;
+	.
+	
+#Link the patient resource to the age resource
+map:ageDiagnosis_patient a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient;
+	d2rq:property roo:100016;
+	d2rq:refersToClassMap map:ageAtDiagnosisObject;
+	.
+	
+#Link the diagnosis resource to the disease
+#map:ageDiagnosis_disease a d2rq:PropertyBridge;
+#	d2rq:belongsToClassMap map:ageAtDiagnosisObject;
+#	d2rq:property roo:100038;
+#	d2rq:refersToClassMap map:patient_disease_obj;
+#	.
+
+############################################
+# Treating hospital
+############################################
+#Create an instance for the hospital as treatment location, and link it to the patient
+map:hospitalObject a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriColumn "thunderset.institute";
+	d2rq:translateWith map:instituteMapping.
+
+#create mapping between code and institute
+map:instituteMapping a d2rq:TranslationTable;
+    d2rq:translation [ d2rq:databaseValue "1"; d2rq:rdfValue <http://www.maastro.nl> ];
+	d2rq:translation [ d2rq:databaseValue "2"; d2rq:rdfValue <http://www.gemelli-art.it> ];
+    .	
+
+#add the value property to the age resource
+map:treatedIn a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient;
+	d2rq:property roo:100039;
+	d2rq:refersToClassMap map:hospitalObject;
+	.
+
+############################################
+# ECOG performance status
+############################################
+map:patientEcogResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "ecog_@@thunderset.id@@";
+	#d2rq:class ncit:C28421;
+	.
+	
+# link patient to ecog status
+map:patientEcogResourceBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient;
+	d2rq:property roo:100218;
+	d2rq:refersToClassMap map:patientEcogResource;
+	.
+	
+# link ecog status to disease
+map:diseaseEcogResourceBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patientEcogResource;
+	d2rq:property roo:100038; #is_when
+	d2rq:refersToClassMap map:patient_disease_obj;
+	.
+	
+# Set the ecog status (rdf type) for the resource
+map:ecogTypeStage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patientEcogResource;
+	d2rq:property rdf:type;
+	d2rq:uriColumn "thunderset.who";
+	d2rq:translateWith map:ecogMapping.
+
+#create mapping between gender and NCI code
+map:ecogMapping a d2rq:TranslationTable;
+    d2rq:translation [ d2rq:databaseValue "0"; d2rq:rdfValue ncit:C105722; ];
+	d2rq:translation [ d2rq:databaseValue "1"; d2rq:rdfValue ncit:C105723; ];
+	d2rq:translation [ d2rq:databaseValue "2"; d2rq:rdfValue ncit:C105725; ];
+	d2rq:translation [ d2rq:databaseValue "3"; d2rq:rdfValue ncit:C105726; ];
+	d2rq:translation [ d2rq:databaseValue "4"; d2rq:rdfValue ncit:C105727; ];
+	d2rq:translation [ d2rq:databaseValue "5"; d2rq:rdfValue ncit:C105728; ];
+    .
+
+############################################
+# Clinical TNM stage
+############################################
+#create object for TNM stage
+map:clinTnmResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "clinTNM_@@thunderset.id@@";
+	d2rq:class ncit:C48881;
+	.
+
+# link TNM object to disease
+map:clinTnmPatientBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient_disease_obj;
+	d2rq:property roo:100243;
+	d2rq:refersToClassMap map:clinTnmResource;
+	.
+
+#create a T-stage resource
+map:diseaseClinTResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "clinTStage_@@thunderset.id@@";
+	.
+	
+# link T-stage to TNM finding object
+map:diseaseTNMTBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:clinTnmResource;
+	d2rq:property roo:100244;
+	d2rq:refersToClassMap map:diseaseClinTResource;
+	.
+	
+# Set the T-stage (rdf type) for the resource
+map:clinTnmTTypeStage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:diseaseClinTResource;
+	d2rq:property rdf:type;
+	d2rq:uriColumn "thunderset.ct";
+	d2rq:translateWith map:tStageMapping;
+	.
+
+#create mapping between gender and NCI code
+map:tStageMapping a d2rq:TranslationTable;
+	d2rq:translation [ d2rq:databaseValue "1"; d2rq:rdfValue ncit:C48720; ];
+	d2rq:translation [ d2rq:databaseValue "2"; d2rq:rdfValue ncit:C48724; ];
+	d2rq:translation [ d2rq:databaseValue "3"; d2rq:rdfValue ncit:C48728; ];
+	d2rq:translation [ d2rq:databaseValue "4"; d2rq:rdfValue ncit:C48732; ];
+    .
+	
+#create a N-stage resource
+map:diseaseClinNResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "clinNStage_@@thunderset.id@@";
+	.
+	
+# link N-stage to TNM finding object
+map:diseaseTNMNBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:clinTnmResource;
+	d2rq:property roo:100242;
+	d2rq:refersToClassMap map:diseaseClinNResource;
+	.
+	
+# Set the T-stage (rdf type) for the resource
+map:clinTnmNTypeStage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:diseaseClinNResource;
+	d2rq:property rdf:type;
+	d2rq:uriColumn "thunderset.cn";
+	d2rq:translateWith map:nStageMapping;
+	.
+
+#create mapping between gender and NCI code
+map:nStageMapping a d2rq:TranslationTable;
+	d2rq:translation [ d2rq:databaseValue "0"; d2rq:rdfValue ncit:C48705; ];
+	d2rq:translation [ d2rq:databaseValue "1"; d2rq:rdfValue ncit:C48706; ];
+	d2rq:translation [ d2rq:databaseValue "2"; d2rq:rdfValue ncit:C48786; ];
+	d2rq:translation [ d2rq:databaseValue "3"; d2rq:rdfValue ncit:C48714; ];
+	d2rq:translation [ d2rq:databaseValue "x"; d2rq:rdfValue ncit:C48718; ];
+    .
+	
+############################################
+# Clinical TNM stage
+############################################
+#create object for TNM stage
+map:pathTnmResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "pathTNM_@@thunderset.id@@";
+	d2rq:class ncit:C48739;
+	.
+
+# link TNM object to disease
+map:pathTnmPatientBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient_disease_obj;
+	d2rq:property roo:100287;
+	d2rq:refersToClassMap map:pathTnmResource;
+	.
+
+#create a T-stage resource
+map:diseasePathTResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "pathTStage_@@thunderset.id@@";
+	.
+	
+# link T-stage to TNM finding object
+map:diseasePathTNMTBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:pathTnmResource;
+	d2rq:property roo:100288;
+	d2rq:refersToClassMap map:diseasePathTResource;
+	.
+	
+# Set the T-stage (rdf type) for the resource
+map:pathTnmTTypeStage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:diseasePathTResource;
+	d2rq:property rdf:type;
+	d2rq:uriColumn "thunderset.pt";
+	d2rq:translateWith map:ptStageMapping;
+	.
+
+#create mapping between gender and NCI code
+map:ptStageMapping a d2rq:TranslationTable;
+	d2rq:translation [ d2rq:databaseValue "1"; d2rq:rdfValue ncit:C48720; ];
+	d2rq:translation [ d2rq:databaseValue "2"; d2rq:rdfValue ncit:C48724; ];
+	d2rq:translation [ d2rq:databaseValue "3"; d2rq:rdfValue ncit:C48728; ];
+	d2rq:translation [ d2rq:databaseValue "4"; d2rq:rdfValue ncit:C48732; ];
+    .
+	
+#create a N-stage resource
+map:diseasePathNResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "pathNStage_@@thunderset.id@@";
+	.
+	
+# link N-stage to TNM finding object
+map:diseasePathTNMNBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:pathTnmResource;
+	d2rq:property roo:100286;
+	d2rq:refersToClassMap map:diseasePathNResource;
+	.
+	
+# Set the T-stage (rdf type) for the resource
+map:pathTnmNTypeStage a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:diseasePathNResource;
+	d2rq:property rdf:type;
+	d2rq:uriColumn "thunderset.pn";
+	d2rq:translateWith map:pnStageMapping;
+	.
+
+#create mapping between gender and NCI code
+map:pnStageMapping a d2rq:TranslationTable;
+	d2rq:translation [ d2rq:databaseValue "0"; d2rq:rdfValue ncit:C48705; ];
+	d2rq:translation [ d2rq:databaseValue "1"; d2rq:rdfValue ncit:C48706; ];
+	d2rq:translation [ d2rq:databaseValue "2"; d2rq:rdfValue ncit:C48786; ];
+	d2rq:translation [ d2rq:databaseValue "3"; d2rq:rdfValue ncit:C48714; ];
+	d2rq:translation [ d2rq:databaseValue "x"; d2rq:rdfValue ncit:C48718; ];
+    .
+
+############################################
+# Add radiation treatment
+############################################
+
+#create Radiation therapy object (SBRT in this case)
+map:sbrtResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "rt_@@thunderset.id@@";
+	d2rq:class ncit:C15313;
+	.
+	
+# link radiotherapy resource to patient
+map:patientSbrtBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:patient;
+	d2rq:property roo:100301;
+	d2rq:refersToClassMap map:sbrtResource;
+	.
+	
+# link radiotherapy resource to disease
+map:diagnosisSbrtBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:sbrtResource;
+	d2rq:property roo:100402;
+	d2rq:refersToClassMap map:patient_disease_obj;
+	.
+	
+#create prescribed dose resource therapy object
+map:prescribedSbrtDoseResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "prescribedDose_@@thunderset.id@@";
+	d2rq:class roo:100013;
+	.
+	
+# link prescribed dose resource to radiotherapy resource
+map:sbrtPrescribedDoseBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:sbrtResource;
+	d2rq:property roo:100023;
+	d2rq:refersToClassMap map:prescribedSbrtDoseResource;
+	.
+	
+#add the actual volume value
+map:prescribedDoseLiteral a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:prescribedSbrtDoseResource;
+	d2rq:property roo:100042;
+	d2rq:sqlExpression "thunderset.total_dose";
+	d2rq:datatype xsd:double;
+	.
+	
+#create gray resource therapy object
+map:prescribedSbrtDoseUnitResource a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "prescribedDoseUnit_@@thunderset.id@@";
+	d2rq:class uo:UO_000134;
+	.
+	
+# link prescribed dose unit resource to prescribed RT resource
+map:sbrtPrescribedDoseUnitBridge a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:prescribedSbrtDoseResource;
+	d2rq:property roo:100027;
+	d2rq:refersToClassMap map:prescribedSbrtDoseUnitResource;
+	.
