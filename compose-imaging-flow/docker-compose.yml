@@ -30,3 +30,18 @@ services:
         - "104:104"
     links:
         - dcm4chee-arc:pacs
+  cwl_postgres:
+    image: postgres
+    volumes:
+      - /Users/johan/Repositories/DataFAIRifier/clinical-data-workflow/workflows/psql_init/:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_PASSWORD=postgres
+  cwl_blazegraph:
+    image: jvsoest/blazegraph
+    ports:
+      - "9999:9999"
+  cwl_runner:
+    image: jvsoest/converter
+    links:
+      - cwl_blazegraph:blazegraph
+      - cwl_postgres:postgresdb
