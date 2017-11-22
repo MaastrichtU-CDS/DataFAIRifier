@@ -1,0 +1,506 @@
+2017-11-22 14:06:27,037 INFO  [org.jboss.modules] (main) JBoss Modules version 1.5.2.Final
+2017-11-22 14:06:27,532 INFO  [org.jboss.msc] (main) JBoss MSC version 1.2.6.Final
+2017-11-22 14:06:27,673 INFO  [org.jboss.as] (MSC service thread 1-4) WFLYSRV0049: WildFly Full 10.1.0.Final (WildFly Core 2.2.0.Final) starting
+2017-11-22 14:06:27,677 DEBUG [org.jboss.as.config] (MSC service thread 1-4) Configured system properties:
+	[Standalone] = 
+	awt.toolkit = sun.awt.X11.XToolkit
+	file.encoding = UTF-8
+	file.encoding.pkg = sun.io
+	file.separator = /
+	java.awt.graphicsenv = sun.awt.X11GraphicsEnvironment
+	java.awt.headless = true
+	java.awt.printerjob = sun.print.PSPrinterJob
+	java.class.path = /opt/wildfly/jboss-modules.jar
+	java.class.version = 52.0
+	java.endorsed.dirs = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/endorsed
+	java.ext.dirs = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext:/usr/java/packages/lib/ext
+	java.home = /usr/lib/jvm/java-8-openjdk-amd64/jre
+	java.io.tmpdir = /tmp
+	java.library.path = /usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+	java.net.preferIPv4Stack = true
+	java.runtime.name = OpenJDK Runtime Environment
+	java.runtime.version = 1.8.0_111-8u111-b14-2~bpo8+1-b14
+	java.specification.name = Java Platform API Specification
+	java.specification.vendor = Oracle Corporation
+	java.specification.version = 1.8
+	java.util.logging.manager = org.jboss.logmanager.LogManager
+	java.vendor = Oracle Corporation
+	java.vendor.url = http://java.oracle.com/
+	java.vendor.url.bug = http://bugreport.sun.com/bugreport/
+	java.version = 1.8.0_111
+	java.vm.info = mixed mode
+	java.vm.name = OpenJDK 64-Bit Server VM
+	java.vm.specification.name = Java Virtual Machine Specification
+	java.vm.specification.vendor = Oracle Corporation
+	java.vm.specification.version = 1.8
+	java.vm.vendor = Oracle Corporation
+	java.vm.version = 25.111-b14
+	javax.management.builder.initial = org.jboss.as.jmx.PluggableMBeanServerBuilder
+	javax.xml.datatype.DatatypeFactory = __redirected.__DatatypeFactory
+	javax.xml.parsers.DocumentBuilderFactory = __redirected.__DocumentBuilderFactory
+	javax.xml.parsers.SAXParserFactory = __redirected.__SAXParserFactory
+	javax.xml.stream.XMLEventFactory = __redirected.__XMLEventFactory
+	javax.xml.stream.XMLInputFactory = __redirected.__XMLInputFactory
+	javax.xml.stream.XMLOutputFactory = __redirected.__XMLOutputFactory
+	javax.xml.transform.TransformerFactory = __redirected.__TransformerFactory
+	javax.xml.validation.SchemaFactory:http://www.w3.org/2001/XMLSchema = __redirected.__SchemaFactory
+	javax.xml.xpath.XPathFactory:http://java.sun.com/jaxp/xpath/dom = __redirected.__XPathFactory
+	jboss.bind.address = 0.0.0.0
+	jboss.bind.address.management = 0.0.0.0
+	jboss.home.dir = /opt/wildfly
+	jboss.host.name = ca65e777cbb8
+	jboss.modules.dir = /opt/wildfly/modules
+	jboss.modules.system.pkgs = org.jboss.byteman
+	jboss.node.name = ca65e777cbb8
+	jboss.qualified.host.name = ca65e777cbb8
+	jboss.server.base.dir = /opt/wildfly/standalone
+	jboss.server.config.dir = /opt/wildfly/standalone/configuration
+	jboss.server.data.dir = /opt/wildfly/standalone/data
+	jboss.server.deploy.dir = /opt/wildfly/standalone/data/content
+	jboss.server.log.dir = /opt/wildfly/standalone/log
+	jboss.server.name = ca65e777cbb8
+	jboss.server.persist.config = true
+	jboss.server.temp.dir = /opt/wildfly/standalone/tmp
+	line.separator = 
+
+	logging.configuration = file:/opt/wildfly/standalone/configuration/logging.properties
+	module.path = /opt/wildfly/modules
+	org.jboss.boot.log.file = /opt/wildfly/standalone/log/server.log
+	org.jboss.resolver.warning = true
+	org.xml.sax.driver = __redirected.__XMLReaderFactory
+	os.arch = amd64
+	os.name = Linux
+	os.version = 4.9.49-moby
+	path.separator = :
+	sun.arch.data.model = 64
+	sun.boot.class.path = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/classes
+	sun.boot.library.path = /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64
+	sun.cpu.endian = little
+	sun.cpu.isalist = 
+	sun.io.unicode.encoding = UnicodeLittle
+	sun.java.command = /opt/wildfly/jboss-modules.jar -mp /opt/wildfly/modules org.jboss.as.standalone -Djboss.home.dir=/opt/wildfly -Djboss.server.base.dir=/opt/wildfly/standalone -b 0.0.0.0 -bmanagement 0.0.0.0 -c dcm4chee-arc.xml
+	sun.java.launcher = SUN_STANDARD
+	sun.jnu.encoding = UTF-8
+	sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+	sun.os.patch.level = unknown
+	user.dir = /
+	user.home = /opt/wildfly
+	user.language = en
+	user.name = wildfly
+	user.timezone = Etc/UTC
+2017-11-22 14:06:27,680 DEBUG [org.jboss.as.config] (MSC service thread 1-4) VM Arguments: -D[Standalone] -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -Dorg.jboss.boot.log.file=/opt/wildfly/standalone/log/server.log -Dlogging.configuration=file:/opt/wildfly/standalone/configuration/logging.properties 
+2017-11-22 14:06:31,260 INFO  [org.jboss.as.repository] (ServerService Thread Pool -- 6) WFLYDR0001: Content added at location /opt/wildfly/standalone/data/content/17/860ef287f8f7ec62a0e8c36cac515a2f6556a3/content
+2017-11-22 14:06:31,323 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0039: Creating http management service using socket-binding (management-http)
+2017-11-22 14:06:31,495 INFO  [org.xnio] (MSC service thread 1-4) XNIO version 3.4.0.Final
+2017-11-22 14:06:31,557 INFO  [org.xnio.nio] (MSC service thread 1-4) XNIO NIO Implementation Version 3.4.0.Final
+2017-11-22 14:06:31,702 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 41) WFLYCLINF0001: Activating Infinispan subsystem.
+2017-11-22 14:06:31,766 INFO  [org.jboss.as.jsf] (ServerService Thread Pool -- 48) WFLYJSF0007: Activated the following JSF Implementations: [main]
+2017-11-22 14:06:31,840 INFO  [org.wildfly.iiop.openjdk] (ServerService Thread Pool -- 42) WFLYIIOP0001: Activating IIOP Subsystem
+2017-11-22 14:06:31,818 INFO  [org.jboss.as.naming] (ServerService Thread Pool -- 52) WFLYNAM0001: Activating Naming Subsystem
+2017-11-22 14:06:31,923 INFO  [org.wildfly.extension.io] (ServerService Thread Pool -- 40) WFLYIO001: Worker 'default' has auto-configured to 4 core threads with 32 task threads based on your 2 available processors
+2017-11-22 14:06:31,936 INFO  [org.jboss.as.webservices] (ServerService Thread Pool -- 62) WFLYWS0002: Activating WebServices Extension
+2017-11-22 14:06:31,939 WARN  [org.jboss.as.txn] (ServerService Thread Pool -- 60) WFLYTX0013: Node identifier property is set to the default value. Please make sure it is unique.
+2017-11-22 14:06:31,939 INFO  [org.jboss.as.security] (ServerService Thread Pool -- 59) WFLYSEC0002: Activating Security Subsystem
+2017-11-22 14:06:32,218 INFO  [org.jboss.remoting] (MSC service thread 1-1) JBoss Remoting version 4.0.21.Final
+2017-11-22 14:06:32,272 INFO  [org.jboss.as.connector] (MSC service thread 1-2) WFLYJCA0009: Starting JCA Subsystem (WildFly/IronJacamar 1.3.4.Final)
+2017-11-22 14:06:32,415 INFO  [org.jboss.as.security] (MSC service thread 1-2) WFLYSEC0001: Current PicketBox version=4.9.6.Final
+2017-11-22 14:06:32,522 INFO  [org.jboss.as.connector.subsystems.datasources] (ServerService Thread Pool -- 36) WFLYJCA0004: Deploying JDBC-compliant driver class org.h2.Driver (version 1.3)
+2017-11-22 14:06:32,607 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-3) WFLYUT0003: Undertow 1.4.0.Final starting
+2017-11-22 14:06:32,805 INFO  [org.jboss.as.connector.subsystems.datasources] (ServerService Thread Pool -- 36) WFLYJCA0005: Deploying non-JDBC-compliant driver class org.postgresql.Driver (version 9.4)
+2017-11-22 14:06:32,824 INFO  [org.jboss.as.naming] (MSC service thread 1-4) WFLYNAM0003: Starting Naming Service
+2017-11-22 14:06:32,970 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-4) WFLYJCA0018: Started Driver service with driver-name = h2
+2017-11-22 14:06:32,971 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-4) WFLYJCA0018: Started Driver service with driver-name = psql
+2017-11-22 14:06:32,912 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-3) WFLYMAIL0001: Bound mail session [java:jboss/mail/Default]
+2017-11-22 14:06:33,473 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 61) WFLYUT0014: Creating file handler for path '/opt/wildfly/welcome-content' with options [directory-listing: 'false', follow-symlink: 'false', case-sensitive: 'true', safe-symlink-paths: '[]']
+2017-11-22 14:06:33,543 INFO  [org.jboss.as.ejb3] (MSC service thread 1-4) WFLYEJB0482: Strict pool mdb-strict-max-pool is using a max instance size of 8 (per class), which is derived from the number of CPUs on this host.
+2017-11-22 14:06:33,552 INFO  [org.jboss.as.ejb3] (MSC service thread 1-3) WFLYEJB0481: Strict pool slsb-strict-max-pool is using a max instance size of 32 (per class), which is derived from thread worker pool sizing.
+2017-11-22 14:06:33,714 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-3) WFLYUT0012: Started server default-server.
+2017-11-22 14:06:33,725 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-4) WFLYUT0018: Host default-host starting
+2017-11-22 14:06:34,189 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-3) WFLYUT0006: Undertow HTTP listener default listening on 0.0.0.0:8080
+2017-11-22 14:06:34,465 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-2) WFLYMSGAMQ0075: AIO wasn't located on this platform, it will fall back to using pure Java NIO. Your platform is Linux, install LibAIO to enable the AIO journal and achieve optimal performance.
+2017-11-22 14:06:34,737 INFO  [org.jboss.as.connector.subsystems.datasources.AbstractDataSourceService$AS7DataSourceDeployer] (MSC service thread 1-4) IJ020018: Enabling <validate-on-match> for java:/PacsDS
+2017-11-22 14:06:35,209 INFO  [org.wildfly.iiop.openjdk] (MSC service thread 1-1) WFLYIIOP0009: CORBA ORB Service started
+2017-11-22 14:06:35,269 INFO  [org.infinispan.factories.GlobalComponentRegistry] (MSC service thread 1-3) ISPN000128: Infinispan version: Infinispan 'Chakra' 8.2.4.Final
+2017-11-22 14:06:35,355 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0027: Starting deployment of "dcm4chee-arc-ear-5.8.1-psql.ear" (runtime-name: "dcm4chee-arc-ear-5.8.1-psql.ear")
+2017-11-22 14:06:35,417 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-3) WFLYDS0013: Started FileSystemDeploymentService for directory /opt/wildfly/standalone/deployments
+2017-11-22 14:06:35,587 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 65) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+2017-11-22 14:06:35,587 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 66) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+2017-11-22 14:06:35,589 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 65) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+2017-11-22 14:06:35,611 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-3) WFLYJCA0001: Bound data source [java:jboss/datasources/ExampleDS]
+2017-11-22 14:06:35,612 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-3) WFLYJCA0001: Bound data source [java:/PacsDS]
+2017-11-22 14:06:35,608 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 66) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+2017-11-22 14:06:35,536 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 67) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+2017-11-22 14:06:35,632 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 67) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+2017-11-22 14:06:35,664 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 64) AMQ221000: live Message Broker is starting with configuration Broker Configuration (clustered=false,journalDirectory=/opt/wildfly/standalone/data/activemq/journal,bindingsDirectory=/opt/wildfly/standalone/data/activemq/bindings,largeMessagesDirectory=/opt/wildfly/standalone/data/activemq/largemessages,pagingDirectory=/opt/wildfly/standalone/data/activemq/paging)
+2017-11-22 14:06:36,148 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 64) AMQ221013: Using NIO Journal
+2017-11-22 14:06:37,321 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 64) AMQ221043: Protocol module found: [artemis-server]. Adding protocol support for: CORE
+2017-11-22 14:06:37,405 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 64) AMQ221043: Protocol module found: [artemis-amqp-protocol]. Adding protocol support for: AMQP
+2017-11-22 14:06:37,406 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-3) WFLYUT0006: Undertow HTTPS listener https listening on 0.0.0.0:8443
+2017-11-22 14:06:37,524 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 64) AMQ221043: Protocol module found: [artemis-hornetq-protocol]. Adding protocol support for: HORNETQ
+2017-11-22 14:06:37,538 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 64) AMQ221043: Protocol module found: [artemis-stomp-protocol]. Adding protocol support for: STOMP
+2017-11-22 14:06:37,777 INFO  [org.jboss.ws.common.management] (MSC service thread 1-1) JBWS022052: Starting JBossWS 5.1.5.Final (Apache CXF 3.1.6) 
+2017-11-22 14:06:38,178 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-1) WFLYMSGAMQ0016: Registered HTTP upgrade for activemq-remoting protocol handled by http-acceptor acceptor
+2017-11-22 14:06:38,179 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-3) WFLYMSGAMQ0016: Registered HTTP upgrade for activemq-remoting protocol handled by http-acceptor acceptor
+2017-11-22 14:06:38,177 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-4) WFLYMSGAMQ0016: Registered HTTP upgrade for activemq-remoting protocol handled by http-acceptor-throughput acceptor
+2017-11-22 14:06:38,195 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-1) WFLYMSGAMQ0016: Registered HTTP upgrade for activemq-remoting protocol handled by http-acceptor-throughput acceptor
+2017-11-22 14:06:38,483 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 64) AMQ221007: Server is now live
+2017-11-22 14:06:38,484 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 64) AMQ221001: Apache ActiveMQ Artemis Message Broker version 1.1.0.wildfly-017 [nodeID=59c3a891-cf8e-11e7-bb3f-494d76f6bccc] 
+2017-11-22 14:06:38,495 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 68) AMQ221003: trying to deploy queue jms.queue.Export3
+2017-11-22 14:06:39,223 INFO  [org.jboss.as.connector.deployment] (MSC service thread 1-3) WFLYJCA0007: Registered connection factory java:/JmsXA
+2017-11-22 14:06:39,286 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 75) AMQ221003: trying to deploy queue jms.queue.StgCmtSCP
+2017-11-22 14:06:39,308 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 73) AMQ221003: trying to deploy queue jms.queue.ExpiryQueue
+2017-11-22 14:06:39,313 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 74) AMQ221003: trying to deploy queue jms.queue.StgCmtSCU
+2017-11-22 14:06:39,329 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 72) AMQ221003: trying to deploy queue jms.queue.MPPSSCU
+2017-11-22 14:06:39,397 INFO  [org.wildfly.extension.messaging-activemq] (ServerService Thread Pool -- 71) WFLYMSGAMQ0002: Bound messaging object to jndi name java:/ConnectionFactory
+2017-11-22 14:06:39,474 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 70) AMQ221003: trying to deploy queue jms.queue.DLQ
+2017-11-22 14:06:39,482 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 69) AMQ221003: trying to deploy queue jms.queue.IANSCU
+2017-11-22 14:06:39,529 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 65) AMQ221003: trying to deploy queue jms.queue.Export2
+2017-11-22 14:06:39,541 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 67) AMQ221003: trying to deploy queue jms.queue.HL7Send
+2017-11-22 14:06:39,547 INFO  [org.apache.activemq.artemis.jms.server] (ServerService Thread Pool -- 66) AMQ121005: Invalid "host" value "0.0.0.0" detected for "http-connector" connector. Switching to "ca65e777cbb8". If this new address is incorrect please manually configure the connector to use the proper one.
+2017-11-22 14:06:39,549 INFO  [org.wildfly.extension.messaging-activemq] (ServerService Thread Pool -- 66) WFLYMSGAMQ0002: Bound messaging object to jndi name java:jboss/exported/jms/RemoteConnectionFactory
+2017-11-22 14:06:39,551 INFO  [org.apache.activemq.artemis.core.server] (ServerService Thread Pool -- 64) AMQ221003: trying to deploy queue jms.queue.Export1
+2017-11-22 14:06:39,635 INFO  [org.apache.activemq.artemis.ra] (MSC service thread 1-3) Resource adaptor started
+2017-11-22 14:06:39,636 INFO  [org.jboss.as.connector.services.resourceadapters.ResourceAdapterActivatorService$ResourceAdapterActivator] (MSC service thread 1-3) IJ020002: Deployed: file://RaActivatoractivemq-ra
+2017-11-22 14:06:39,644 INFO  [org.jboss.as.connector.deployment] (MSC service thread 1-3) WFLYJCA0002: Bound JCA ConnectionFactory [java:/JmsXA]
+2017-11-22 14:06:39,644 INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-1) WFLYMSGAMQ0002: Bound messaging object to jndi name java:jboss/DefaultJMSConnectionFactory
+2017-11-22 14:06:39,689 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-qmgt-5.8.1.jar")
+2017-11-22 14:06:39,691 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-retrieve-5.8.1.jar")
+2017-11-22 14:06:39,691 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-war-5.8.1-unsecure.war")
+2017-11-22 14:06:39,691 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-procedure-5.8.1.jar")
+2017-11-22 14:06:39,692 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-query-5.8.1.jar")
+2017-11-22 14:06:39,692 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-rs-client-5.8.1.jar")
+2017-11-22 14:06:39,692 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-mpps-scu-5.8.1.jar")
+2017-11-22 14:06:39,693 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-issuer-5.8.1.jar")
+2017-11-22 14:06:39,689 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-4) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-export-mgt-5.8.1.jar")
+2017-11-22 14:06:39,693 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-ian-scu-5.8.1.jar")
+2017-11-22 14:06:39,694 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-stgcmt-5.8.1.jar")
+2017-11-22 14:06:39,694 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-hl7-5.8.1.jar")
+2017-11-22 14:06:39,694 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-metadata-5.8.1.jar")
+2017-11-22 14:06:39,695 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-ui-5.8.1-unsecure.war")
+2017-11-22 14:06:39,689 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-mpps-5.8.1.jar")
+2017-11-22 14:06:39,693 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-4) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-store-5.8.1.jar")
+2017-11-22 14:06:39,696 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-delete-5.8.1.jar")
+2017-11-22 14:06:39,696 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-study-5.8.1.jar")
+2017-11-22 14:06:39,706 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-code-5.8.1.jar")
+2017-11-22 14:06:39,691 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-2) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-service-5.8.1.jar")
+2017-11-22 14:06:39,696 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-3) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-patient-5.8.1.jar")
+2017-11-22 14:06:39,696 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-4) WFLYSRV0207: Starting subdeployment (runtime-name: "dcm4chee-arc-id-5.8.1.jar")
+2017-11-22 14:06:40,375 INFO  [org.jboss.as.jpa] (MSC service thread 1-2) WFLYJPA0002: Read persistence.xml for dcm4chee-arc
+2017-11-22 14:06:41,793 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 65) WFLYJPA0010: Starting Persistence Unit (phase 1 of 2) Service 'dcm4chee-arc-ear-5.8.1-psql.ear#dcm4chee-arc'
+2017-11-22 14:06:41,872 INFO  [org.hibernate.jpa.internal.util.LogHelper] (ServerService Thread Pool -- 65) HHH000204: Processing PersistenceUnitInfo [
+	name: dcm4chee-arc
+	...]
+2017-11-22 14:06:41,969 INFO  [org.jboss.weld.deployer] (MSC service thread 1-2) WFLYWELD0003: Processing weld deployment dcm4chee-arc-ear-5.8.1-psql.ear
+2017-11-22 14:06:42,226 INFO  [org.hibernate.Version] (ServerService Thread Pool -- 65) HHH000412: Hibernate Core {5.0.10.Final}
+2017-11-22 14:06:42,227 INFO  [org.hibernate.cfg.Environment] (ServerService Thread Pool -- 65) HHH000206: hibernate.properties not found
+2017-11-22 14:06:42,237 INFO  [org.hibernate.cfg.Environment] (ServerService Thread Pool -- 65) HHH000021: Bytecode provider name : javassist
+2017-11-22 14:06:42,408 INFO  [org.hibernate.annotations.common.Version] (ServerService Thread Pool -- 65) HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-11-22 14:06:42,409 INFO  [org.hibernate.validator.internal.util.Version] (MSC service thread 1-2) HV000001: Hibernate Validator 5.2.4.Final
+2017-11-22 14:06:42,929 INFO  [org.jboss.weld.deployer] (MSC service thread 1-4) WFLYWELD0003: Processing weld deployment dcm4chee-arc-mpps-scu-5.8.1.jar
+2017-11-22 14:06:42,931 INFO  [org.jboss.weld.deployer] (MSC service thread 1-1) WFLYWELD0003: Processing weld deployment dcm4chee-arc-id-5.8.1.jar
+2017-11-22 14:06:42,935 INFO  [org.jboss.weld.deployer] (MSC service thread 1-3) WFLYWELD0003: Processing weld deployment dcm4chee-arc-query-5.8.1.jar
+2017-11-22 14:06:42,957 INFO  [org.jboss.weld.deployer] (MSC service thread 1-2) WFLYWELD0003: Processing weld deployment dcm4chee-arc-study-5.8.1.jar
+2017-11-22 14:06:42,962 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-1) WFLYEJB0473: JNDI bindings for session bean named 'IDServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-id-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-id-5.8.1/IDServiceEJB!org.dcm4chee.arc.id.impl.IDServiceEJB
+	java:app/dcm4chee-arc-id-5.8.1/IDServiceEJB!org.dcm4chee.arc.id.impl.IDServiceEJB
+	java:module/IDServiceEJB!org.dcm4chee.arc.id.impl.IDServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-id-5.8.1/IDServiceEJB
+	java:app/dcm4chee-arc-id-5.8.1/IDServiceEJB
+	java:module/IDServiceEJB
+
+2017-11-22 14:06:42,963 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-3) WFLYEJB0473: JNDI bindings for session bean named 'QueryServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-query-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-query-5.8.1/QueryServiceEJB!org.dcm4chee.arc.query.impl.QueryServiceEJB
+	java:app/dcm4chee-arc-query-5.8.1/QueryServiceEJB!org.dcm4chee.arc.query.impl.QueryServiceEJB
+	java:module/QueryServiceEJB!org.dcm4chee.arc.query.impl.QueryServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-query-5.8.1/QueryServiceEJB
+	java:app/dcm4chee-arc-query-5.8.1/QueryServiceEJB
+	java:module/QueryServiceEJB
+
+2017-11-22 14:06:42,990 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-2) WFLYEJB0473: JNDI bindings for session bean named 'StudyServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-study-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-study-5.8.1/StudyServiceEJB!org.dcm4chee.arc.study.impl.StudyServiceEJB
+	java:app/dcm4chee-arc-study-5.8.1/StudyServiceEJB!org.dcm4chee.arc.study.impl.StudyServiceEJB
+	java:module/StudyServiceEJB!org.dcm4chee.arc.study.impl.StudyServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-study-5.8.1/StudyServiceEJB
+	java:app/dcm4chee-arc-study-5.8.1/StudyServiceEJB
+	java:module/StudyServiceEJB
+
+2017-11-22 14:06:43,164 INFO  [org.jboss.weld.deployer] (MSC service thread 1-1) WFLYWELD0003: Processing weld deployment dcm4chee-arc-metadata-5.8.1.jar
+2017-11-22 14:06:43,165 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-1) WFLYEJB0473: JNDI bindings for session bean named 'UpdateMetadataEJB' in deployment unit 'subdeployment "dcm4chee-arc-metadata-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-metadata-5.8.1/UpdateMetadataEJB!org.dcm4chee.arc.metadata.UpdateMetadataEJB
+	java:app/dcm4chee-arc-metadata-5.8.1/UpdateMetadataEJB!org.dcm4chee.arc.metadata.UpdateMetadataEJB
+	java:module/UpdateMetadataEJB!org.dcm4chee.arc.metadata.UpdateMetadataEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-metadata-5.8.1/UpdateMetadataEJB
+	java:app/dcm4chee-arc-metadata-5.8.1/UpdateMetadataEJB
+	java:module/UpdateMetadataEJB
+
+2017-11-22 14:06:43,180 INFO  [org.jboss.weld.deployer] (MSC service thread 1-1) WFLYWELD0003: Processing weld deployment dcm4chee-arc-hl7-5.8.1.jar
+2017-11-22 14:06:43,213 INFO  [org.jboss.weld.deployer] (MSC service thread 1-1) WFLYWELD0003: Processing weld deployment dcm4chee-arc-retrieve-5.8.1.jar
+2017-11-22 14:06:43,214 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-1) WFLYEJB0473: JNDI bindings for session bean named 'RetrieveServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-retrieve-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-retrieve-5.8.1/RetrieveServiceEJB!org.dcm4chee.arc.retrieve.impl.RetrieveServiceEJB
+	java:app/dcm4chee-arc-retrieve-5.8.1/RetrieveServiceEJB!org.dcm4chee.arc.retrieve.impl.RetrieveServiceEJB
+	java:module/RetrieveServiceEJB!org.dcm4chee.arc.retrieve.impl.RetrieveServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-retrieve-5.8.1/RetrieveServiceEJB
+	java:app/dcm4chee-arc-retrieve-5.8.1/RetrieveServiceEJB
+	java:module/RetrieveServiceEJB
+
+2017-11-22 14:06:43,214 INFO  [org.jboss.weld.deployer] (MSC service thread 1-3) WFLYWELD0003: Processing weld deployment dcm4chee-arc-ian-scu-5.8.1.jar
+2017-11-22 14:06:43,215 INFO  [org.jboss.weld.deployer] (MSC service thread 1-2) WFLYWELD0003: Processing weld deployment dcm4chee-arc-stgcmt-5.8.1.jar
+2017-11-22 14:06:43,220 INFO  [org.jboss.weld.deployer] (MSC service thread 1-4) WFLYWELD0003: Processing weld deployment dcm4chee-arc-export-mgt-5.8.1.jar
+2017-11-22 14:06:43,221 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-4) WFLYEJB0473: JNDI bindings for session bean named 'ExportManagerEJB' in deployment unit 'subdeployment "dcm4chee-arc-export-mgt-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-export-mgt-5.8.1/ExportManagerEJB!org.dcm4chee.arc.export.mgt.ExportManager
+	java:app/dcm4chee-arc-export-mgt-5.8.1/ExportManagerEJB!org.dcm4chee.arc.export.mgt.ExportManager
+	java:module/ExportManagerEJB!org.dcm4chee.arc.export.mgt.ExportManager
+	java:global/dcm4chee-arc/dcm4chee-arc-export-mgt-5.8.1/ExportManagerEJB
+	java:app/dcm4chee-arc-export-mgt-5.8.1/ExportManagerEJB
+	java:module/ExportManagerEJB
+
+2017-11-22 14:06:43,215 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-3) WFLYEJB0473: JNDI bindings for session bean named 'IANEJB' in deployment unit 'subdeployment "dcm4chee-arc-ian-scu-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-ian-scu-5.8.1/IANEJB!org.dcm4chee.arc.ian.scu.impl.IANEJB
+	java:app/dcm4chee-arc-ian-scu-5.8.1/IANEJB!org.dcm4chee.arc.ian.scu.impl.IANEJB
+	java:module/IANEJB!org.dcm4chee.arc.ian.scu.impl.IANEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-ian-scu-5.8.1/IANEJB
+	java:app/dcm4chee-arc-ian-scu-5.8.1/IANEJB
+	java:module/IANEJB
+
+2017-11-22 14:06:43,224 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-2) WFLYEJB0473: JNDI bindings for session bean named 'StgCmtEJB' in deployment unit 'subdeployment "dcm4chee-arc-stgcmt-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-stgcmt-5.8.1/StgCmtEJB!org.dcm4chee.arc.stgcmt.StgCmtManager
+	java:app/dcm4chee-arc-stgcmt-5.8.1/StgCmtEJB!org.dcm4chee.arc.stgcmt.StgCmtManager
+	java:module/StgCmtEJB!org.dcm4chee.arc.stgcmt.StgCmtManager
+	java:global/dcm4chee-arc/dcm4chee-arc-stgcmt-5.8.1/StgCmtEJB
+	java:app/dcm4chee-arc-stgcmt-5.8.1/StgCmtEJB
+	java:module/StgCmtEJB
+
+2017-11-22 14:06:43,229 INFO  [org.jboss.weld.deployer] (MSC service thread 1-2) WFLYWELD0003: Processing weld deployment dcm4chee-arc-rs-client-5.8.1.jar
+2017-11-22 14:06:43,233 INFO  [org.jboss.weld.deployer] (MSC service thread 1-1) WFLYWELD0003: Processing weld deployment dcm4chee-arc-procedure-5.8.1.jar
+2017-11-22 14:06:43,251 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-1) WFLYEJB0473: JNDI bindings for session bean named 'ProcedureServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-procedure-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-procedure-5.8.1/ProcedureServiceEJB!org.dcm4chee.arc.procedure.impl.ProcedureServiceEJB
+	java:app/dcm4chee-arc-procedure-5.8.1/ProcedureServiceEJB!org.dcm4chee.arc.procedure.impl.ProcedureServiceEJB
+	java:module/ProcedureServiceEJB!org.dcm4chee.arc.procedure.impl.ProcedureServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-procedure-5.8.1/ProcedureServiceEJB
+	java:app/dcm4chee-arc-procedure-5.8.1/ProcedureServiceEJB
+	java:module/ProcedureServiceEJB
+
+2017-11-22 14:06:43,385 INFO  [org.jboss.weld.deployer] (MSC service thread 1-4) WFLYWELD0003: Processing weld deployment dcm4chee-arc-patient-5.8.1.jar
+2017-11-22 14:06:43,387 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-4) WFLYEJB0473: JNDI bindings for session bean named 'PatientServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-patient-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-patient-5.8.1/PatientServiceEJB!org.dcm4chee.arc.patient.impl.PatientServiceEJB
+	java:app/dcm4chee-arc-patient-5.8.1/PatientServiceEJB!org.dcm4chee.arc.patient.impl.PatientServiceEJB
+	java:module/PatientServiceEJB!org.dcm4chee.arc.patient.impl.PatientServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-patient-5.8.1/PatientServiceEJB
+	java:app/dcm4chee-arc-patient-5.8.1/PatientServiceEJB
+	java:module/PatientServiceEJB
+
+2017-11-22 14:06:43,397 INFO  [org.jboss.weld.deployer] (MSC service thread 1-4) WFLYWELD0003: Processing weld deployment dcm4chee-arc-issuer-5.8.1.jar
+2017-11-22 14:06:43,399 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-4) WFLYEJB0473: JNDI bindings for session bean named 'IssuerServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-issuer-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-issuer-5.8.1/IssuerServiceEJB!org.dcm4chee.arc.issuer.IssuerService
+	java:app/dcm4chee-arc-issuer-5.8.1/IssuerServiceEJB!org.dcm4chee.arc.issuer.IssuerService
+	java:module/IssuerServiceEJB!org.dcm4chee.arc.issuer.IssuerService
+	java:global/dcm4chee-arc/dcm4chee-arc-issuer-5.8.1/IssuerServiceEJB
+	java:app/dcm4chee-arc-issuer-5.8.1/IssuerServiceEJB
+	java:module/IssuerServiceEJB
+
+2017-11-22 14:06:43,403 INFO  [org.jboss.weld.deployer] (MSC service thread 1-2) WFLYWELD0003: Processing weld deployment dcm4chee-arc-service-5.8.1.jar
+2017-11-22 14:06:43,408 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-2) WFLYEJB0473: JNDI bindings for session bean named 'ArchiveServiceImpl' in deployment unit 'subdeployment "dcm4chee-arc-service-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-service-5.8.1/ArchiveServiceImpl!org.dcm4chee.arc.ArchiveService
+	java:app/dcm4chee-arc-service-5.8.1/ArchiveServiceImpl!org.dcm4chee.arc.ArchiveService
+	java:module/ArchiveServiceImpl!org.dcm4chee.arc.ArchiveService
+	java:global/dcm4chee-arc/dcm4chee-arc-service-5.8.1/ArchiveServiceImpl
+	java:app/dcm4chee-arc-service-5.8.1/ArchiveServiceImpl
+	java:module/ArchiveServiceImpl
+
+2017-11-22 14:06:43,403 INFO  [org.jboss.weld.deployer] (MSC service thread 1-1) WFLYWELD0003: Processing weld deployment dcm4chee-arc-store-5.8.1.jar
+2017-11-22 14:06:43,413 INFO  [org.jboss.weld.deployer] (MSC service thread 1-4) WFLYWELD0003: Processing weld deployment dcm4chee-arc-delete-5.8.1.jar
+2017-11-22 14:06:43,418 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-4) WFLYEJB0473: JNDI bindings for session bean named 'DeletionServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-delete-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-delete-5.8.1/DeletionServiceEJB!org.dcm4chee.arc.delete.impl.DeletionServiceEJB
+	java:app/dcm4chee-arc-delete-5.8.1/DeletionServiceEJB!org.dcm4chee.arc.delete.impl.DeletionServiceEJB
+	java:module/DeletionServiceEJB!org.dcm4chee.arc.delete.impl.DeletionServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-delete-5.8.1/DeletionServiceEJB
+	java:app/dcm4chee-arc-delete-5.8.1/DeletionServiceEJB
+	java:module/DeletionServiceEJB
+
+2017-11-22 14:06:43,425 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-1) WFLYEJB0473: JNDI bindings for session bean named 'StoreServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-store-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-store-5.8.1/StoreServiceEJB!org.dcm4chee.arc.store.impl.StoreServiceEJB
+	java:app/dcm4chee-arc-store-5.8.1/StoreServiceEJB!org.dcm4chee.arc.store.impl.StoreServiceEJB
+	java:module/StoreServiceEJB!org.dcm4chee.arc.store.impl.StoreServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-store-5.8.1/StoreServiceEJB
+	java:app/dcm4chee-arc-store-5.8.1/StoreServiceEJB
+	java:module/StoreServiceEJB
+
+2017-11-22 14:06:43,455 INFO  [org.jboss.weld.deployer] (MSC service thread 1-2) WFLYWELD0003: Processing weld deployment dcm4chee-arc-mpps-5.8.1.jar
+2017-11-22 14:06:43,463 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-2) WFLYEJB0473: JNDI bindings for session bean named 'MPPSServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-mpps-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-mpps-5.8.1/MPPSServiceEJB!org.dcm4chee.arc.mpps.impl.MPPSServiceEJB
+	java:app/dcm4chee-arc-mpps-5.8.1/MPPSServiceEJB!org.dcm4chee.arc.mpps.impl.MPPSServiceEJB
+	java:module/MPPSServiceEJB!org.dcm4chee.arc.mpps.impl.MPPSServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-mpps-5.8.1/MPPSServiceEJB
+	java:app/dcm4chee-arc-mpps-5.8.1/MPPSServiceEJB
+	java:module/MPPSServiceEJB
+
+2017-11-22 14:06:43,462 INFO  [org.jboss.weld.deployer] (MSC service thread 1-4) WFLYWELD0003: Processing weld deployment dcm4chee-arc-code-5.8.1.jar
+2017-11-22 14:06:43,468 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-4) WFLYEJB0473: JNDI bindings for session bean named 'CodeServiceEJB' in deployment unit 'subdeployment "dcm4chee-arc-code-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-code-5.8.1/CodeServiceEJB!org.dcm4chee.arc.code.impl.CodeServiceEJB
+	java:app/dcm4chee-arc-code-5.8.1/CodeServiceEJB!org.dcm4chee.arc.code.impl.CodeServiceEJB
+	java:module/CodeServiceEJB!org.dcm4chee.arc.code.impl.CodeServiceEJB
+	java:global/dcm4chee-arc/dcm4chee-arc-code-5.8.1/CodeServiceEJB
+	java:app/dcm4chee-arc-code-5.8.1/CodeServiceEJB
+	java:module/CodeServiceEJB
+
+2017-11-22 14:06:43,469 INFO  [org.jboss.weld.deployer] (MSC service thread 1-3) WFLYWELD0003: Processing weld deployment dcm4chee-arc-war-5.8.1-unsecure.war
+2017-11-22 14:06:43,490 INFO  [org.jboss.weld.deployer] (MSC service thread 1-2) WFLYWELD0003: Processing weld deployment dcm4chee-arc-ui-5.8.1-unsecure.war
+2017-11-22 14:06:43,487 INFO  [org.jboss.weld.deployer] (MSC service thread 1-1) WFLYWELD0003: Processing weld deployment dcm4chee-arc-qmgt-5.8.1.jar
+2017-11-22 14:06:43,505 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-1) WFLYEJB0473: JNDI bindings for session bean named 'QueueManagerEJB' in deployment unit 'subdeployment "dcm4chee-arc-qmgt-5.8.1.jar" of deployment "dcm4chee-arc-ear-5.8.1-psql.ear"' are as follows:
+
+	java:global/dcm4chee-arc/dcm4chee-arc-qmgt-5.8.1/QueueManagerEJB!org.dcm4chee.arc.qmgt.QueueManager
+	java:app/dcm4chee-arc-qmgt-5.8.1/QueueManagerEJB!org.dcm4chee.arc.qmgt.QueueManager
+	java:module/QueueManagerEJB!org.dcm4chee.arc.qmgt.QueueManager
+	java:global/dcm4chee-arc/dcm4chee-arc-qmgt-5.8.1/QueueManagerEJB
+	java:app/dcm4chee-arc-qmgt-5.8.1/QueueManagerEJB
+	java:module/QueueManagerEJB
+
+2017-11-22 14:06:44,056 INFO  [org.jboss.weld.Version] (MSC service thread 1-2) WELD-000900: 2.3.5 (Final)
+2017-11-22 14:06:44,997 INFO  [org.jboss.as.ejb3] (MSC service thread 1-3) WFLYEJB0042: Started message driven bean 'IANMDB' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,020 INFO  [org.jboss.as.ejb3] (MSC service thread 1-1) WFLYEJB0042: Started message driven bean 'ExportManagerMDB1' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,031 INFO  [org.jboss.as.ejb3] (MSC service thread 1-3) WFLYEJB0042: Started message driven bean 'ExportManagerMDB2' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,038 INFO  [org.jboss.as.ejb3] (MSC service thread 1-3) WFLYEJB0042: Started message driven bean 'MPPSMDB' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,039 INFO  [org.jboss.as.ejb3] (MSC service thread 1-1) WFLYEJB0042: Started message driven bean 'ExportManagerMDB3' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,046 INFO  [org.jboss.as.ejb3] (MSC service thread 1-3) WFLYEJB0042: Started message driven bean 'HL7SenderMDB' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,049 INFO  [org.jboss.as.ejb3] (MSC service thread 1-1) WFLYEJB0042: Started message driven bean 'StgCmtSCUMDB' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,059 INFO  [org.jboss.as.ejb3] (MSC service thread 1-3) WFLYEJB0042: Started message driven bean 'StgCmtSCPMDB' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,086 INFO  [org.jboss.as.ejb3] (MSC service thread 1-1) WFLYEJB0042: Started message driven bean 'RSClientMDB' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,124 INFO  [org.jboss.as.ejb3] (MSC service thread 1-1) WFLYEJB0042: Started message driven bean 'RSClientMDB' with 'activemq-ra.rar' resource adapter
+2017-11-22 14:06:45,171 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 65) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+2017-11-22 14:06:45,179 INFO  [org.infinispan.configuration.cache.EvictionConfigurationBuilder] (ServerService Thread Pool -- 65) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+2017-11-22 14:06:45,928 INFO  [org.jboss.as.jpa] (ServerService Thread Pool -- 64) WFLYJPA0010: Starting Persistence Unit (phase 2 of 2) Service 'dcm4chee-arc-ear-5.8.1-psql.ear#dcm4chee-arc'
+2017-11-22 14:06:46,412 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 65) WFLYCLINF0002: Started client-mappings cache from ejb container
+2017-11-22 14:06:46,725 INFO  [org.hibernate.dialect.Dialect] (ServerService Thread Pool -- 64) HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2017-11-22 14:06:47,853 INFO  [org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl] (ServerService Thread Pool -- 64) HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2017-11-22 14:06:47,876 INFO  [org.hibernate.type.BasicTypeRegistry] (ServerService Thread Pool -- 64) HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@2914082d
+2017-11-22 14:06:47,902 INFO  [org.hibernate.envers.boot.internal.EnversServiceImpl] (ServerService Thread Pool -- 64) Envers integration enabled? : true
+2017-11-22 14:06:50,381 INFO  [org.hibernate.hql.internal.QueryTranslatorFactoryInitiator] (ServerService Thread Pool -- 64) HHH000397: Using ASTQueryTranslatorFactory
+2017-11-22 14:06:57,641 INFO  [org.apache.activemq.artemis.ra] (default-threads - 7) AMQ151000: awaiting topic/queue creation jms/queue/RSClient
+2017-11-22 14:06:57,643 INFO  [org.apache.activemq.artemis.ra] (default-threads - 9) AMQ151000: awaiting topic/queue creation jms/queue/RSClient
+2017-11-22 14:06:58,318 INFO  [javax.enterprise.resource.webcontainer.jsf.config] (ServerService Thread Pool -- 67) Initializing Mojarra 2.2.13.SP1 20160303-1204 for context '/dcm4chee-arc'
+2017-11-22 14:06:58,320 INFO  [javax.enterprise.resource.webcontainer.jsf.config] (ServerService Thread Pool -- 70) Initializing Mojarra 2.2.13.SP1 20160303-1204 for context '/dcm4chee-arc/ui'
+2017-11-22 14:06:59,682 INFO  [org.apache.activemq.artemis.ra] (default-threads - 9) AMQ151001: Attempting to reconnect org.apache.activemq.artemis.ra.inflow.ActiveMQActivationSpec(ra=org.apache.activemq.artemis.ra.ActiveMQResourceAdapter@78712571 destination=jms/queue/RSClient destinationType=javax.jms.Queue ack=Auto-acknowledge durable=false clientID=null user=null maxSession=1)
+2017-11-22 14:06:59,692 INFO  [org.apache.activemq.artemis.ra] (default-threads - 7) AMQ151001: Attempting to reconnect org.apache.activemq.artemis.ra.inflow.ActiveMQActivationSpec(ra=org.apache.activemq.artemis.ra.ActiveMQResourceAdapter@78712571 destination=jms/queue/RSClient destinationType=javax.jms.Queue ack=Auto-acknowledge durable=false clientID=null user=null maxSession=1)
+2017-11-22 14:07:00,609 INFO  [org.dcm4che3.net.Connection] (EE-ManagedExecutorService-default-Thread-2) Start TCP Listener on /0.0.0.0:11112
+2017-11-22 14:07:00,609 INFO  [org.dcm4che3.net.Connection] (EE-ManagedExecutorService-default-Thread-1) Start TCP Listener on /0.0.0.0:2575
+2017-11-22 14:07:02,263 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 67) WFLYUT0021: Registered web context: /dcm4chee-arc
+2017-11-22 14:07:02,342 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 70) WFLYUT0021: Registered web context: /dcm4chee-arc/ui
+2017-11-22 14:07:02,434 INFO  [org.dcm4che3.net.Connection] (ServerService Thread Pool -- 65) Initiate connection from /0.0.0.0:0 to logstash:8514
+2017-11-22 14:07:02,452 WARN  [org.dcm4chee.arc.audit.AuditService] (ServerService Thread Pool -- 65) Failed to emit audit message: java.net.UnknownHostException: logstash: Name or service not known
+	at java.net.Inet4AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$2.lookupAllHostAddr(InetAddress.java:928)
+	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1323)
+	at java.net.InetAddress.getAllByName0(InetAddress.java:1276)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1192)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1126)
+	at java.net.InetAddress.getByName(InetAddress.java:1076)
+	at org.dcm4che3.net.Connection.hostAddr(Connection.java:800)
+	at org.dcm4che3.net.Connection.getEndPoint(Connection.java:840)
+	at org.dcm4che3.net.Connection.connect(Connection.java:951)
+	at org.dcm4che3.net.audit.AuditLogger$TCPConnection.connect(AuditLogger.java:1153)
+	at org.dcm4che3.net.audit.AuditLogger$TCPConnection.sendMessage(AuditLogger.java:1162)
+	at org.dcm4che3.net.audit.AuditLogger.sendMessage(AuditLogger.java:729)
+	at org.dcm4che3.net.audit.AuditLogger.write(AuditLogger.java:706)
+	at org.dcm4chee.arc.audit.AuditService.emitAuditMessage(AuditService.java:941)
+	at org.dcm4chee.arc.audit.AuditService.auditApplicationActivity(AuditService.java:161)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.jboss.weld.bean.proxy.AbstractBeanInstance.invoke(AbstractBeanInstance.java:38)
+	at org.jboss.weld.bean.proxy.ProxyMethodHandler.invoke(ProxyMethodHandler.java:100)
+	at org.dcm4chee.arc.audit.AuditService$Proxy$_$$_WeldClientProxy.auditApplicationActivity(Unknown Source)
+	at org.dcm4chee.arc.audit.AuditTriggerObserver.onArchiveServiceEvent(AuditTriggerObserver.java:94)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.jboss.weld.injection.StaticMethodInjectionPoint.invoke(StaticMethodInjectionPoint.java:88)
+	at org.jboss.weld.injection.StaticMethodInjectionPoint.invoke(StaticMethodInjectionPoint.java:78)
+	at org.jboss.weld.injection.MethodInvocationStrategy$SimpleMethodInvocationStrategy.invoke(MethodInvocationStrategy.java:129)
+	at org.jboss.weld.event.ObserverMethodImpl.sendEvent(ObserverMethodImpl.java:313)
+	at org.jboss.weld.event.ObserverMethodImpl.sendEvent(ObserverMethodImpl.java:291)
+	at org.jboss.weld.event.ObserverMethodImpl.notify(ObserverMethodImpl.java:269)
+	at org.jboss.weld.event.ObserverNotifier.notifySyncObservers(ObserverNotifier.java:302)
+	at org.jboss.weld.event.ObserverNotifier.notify(ObserverNotifier.java:291)
+	at org.jboss.weld.event.EventImpl.fire(EventImpl.java:89)
+	at org.dcm4chee.arc.impl.ArchiveServiceImpl.start(ArchiveServiceImpl.java:183)
+	at org.dcm4chee.arc.impl.ArchiveServiceImpl.init(ArchiveServiceImpl.java:155)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.jboss.as.ee.component.ManagedReferenceLifecycleMethodInterceptor.processInvocation(ManagedReferenceLifecycleMethodInterceptor.java:96)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.weld.ejb.Jsr299BindingsInterceptor.doLifecycleInterception(Jsr299BindingsInterceptor.java:114)
+	at org.jboss.as.weld.ejb.Jsr299BindingsInterceptor.processInvocation(Jsr299BindingsInterceptor.java:103)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.invocation.InterceptorContext$Invocation.proceed(InterceptorContext.java:437)
+	at org.jboss.weld.ejb.AbstractEJBRequestScopeActivationInterceptor.aroundInvoke(AbstractEJBRequestScopeActivationInterceptor.java:73)
+	at org.jboss.as.weld.ejb.EjbRequestScopeActivationInterceptor.processInvocation(EjbRequestScopeActivationInterceptor.java:83)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.weld.injection.WeldInjectionInterceptor.processInvocation(WeldInjectionInterceptor.java:53)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.ee.component.ManagedReferenceFieldInjectionInterceptorFactory$ManagedReferenceFieldInjectionInterceptor.processInvocation(ManagedReferenceFieldInjectionInterceptorFactory.java:107)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.ee.component.ManagedReferenceFieldInjectionInterceptorFactory$ManagedReferenceFieldInjectionInterceptor.processInvocation(ManagedReferenceFieldInjectionInterceptorFactory.java:107)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.ee.component.AroundConstructInterceptorFactory$1.processInvocation(AroundConstructInterceptorFactory.java:28)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.weld.injection.WeldInterceptorInjectionInterceptor.processInvocation(WeldInterceptorInjectionInterceptor.java:56)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.weld.ejb.Jsr299BindingsCreateInterceptor.processInvocation(Jsr299BindingsCreateInterceptor.java:100)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.ee.component.NamespaceContextInterceptor.processInvocation(NamespaceContextInterceptor.java:50)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInOurTx(CMTTxInterceptor.java:275)
+	at org.jboss.as.ejb3.tx.CMTTxInterceptor.requiresNew(CMTTxInterceptor.java:349)
+	at org.jboss.as.ejb3.tx.LifecycleCMTTxInterceptor.processInvocation(LifecycleCMTTxInterceptor.java:68)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.weld.injection.WeldInjectionContextInterceptor.processInvocation(WeldInjectionContextInterceptor.java:43)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.ejb3.component.interceptors.CurrentInvocationContextInterceptor.processInvocation(CurrentInvocationContextInterceptor.java:41)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.ee.concurrent.ConcurrentContextInterceptor.processInvocation(ConcurrentContextInterceptor.java:45)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.invocation.ContextClassLoaderInterceptor.processInvocation(ContextClassLoaderInterceptor.java:64)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.as.ejb3.component.singleton.StartupCountDownInterceptor.processInvocation(StartupCountDownInterceptor.java:25)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.invocation.InterceptorContext.run(InterceptorContext.java:356)
+	at org.jboss.invocation.PrivilegedWithCombinerInterceptor.processInvocation(PrivilegedWithCombinerInterceptor.java:80)
+	at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:340)
+	at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61)
+	at org.jboss.as.ee.component.BasicComponent.constructComponentInstance(BasicComponent.java:161)
+	at org.jboss.as.ee.component.BasicComponent.constructComponentInstance(BasicComponent.java:134)
+	at org.jboss.as.ee.component.BasicComponent.createInstance(BasicComponent.java:88)
+	at org.jboss.as.ejb3.component.singleton.SingletonComponent.getComponentInstance(SingletonComponent.java:124)
+	at org.jboss.as.ejb3.component.singleton.SingletonComponent.start(SingletonComponent.java:138)
+	at org.jboss.as.ee.component.ComponentStartService$1.run(ComponentStartService.java:54)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+	at org.jboss.threads.JBossThread.run(JBossThread.java:320)
+
+2017-11-22 14:07:02,553 INFO  [org.jboss.as.server] (ServerService Thread Pool -- 37) WFLYSRV0010: Deployed "dcm4chee-arc-ear-5.8.1-psql.ear" (runtime-name : "dcm4chee-arc-ear-5.8.1-psql.ear")
+2017-11-22 14:07:02,981 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://0.0.0.0:9990/management
+2017-11-22 14:07:02,981 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://0.0.0.0:9990
+2017-11-22 14:07:02,982 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 10.1.0.Final (WildFly Core 2.2.0.Final) started in 36584ms - Started 2229 of 2596 services (615 services are lazy, passive or on-demand)
