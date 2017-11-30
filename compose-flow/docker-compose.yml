@@ -1,5 +1,8 @@
 version: "2"
 services:
+  ###########################################
+  ###### Imaging workflow              ######
+  ###########################################
   slapd:
     image: dcm4che/slapd-dcm4chee:2.4.40-8.1
     env_file: docker-compose.env
@@ -30,6 +33,9 @@ services:
         - "104:104"
     links:
         - dcm4chee-arc:pacs
+###########################################
+###### Clinical Workflow             ######
+###########################################
   cwl_postgres:
     image: postgres
     volumes:
