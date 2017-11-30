@@ -48,6 +48,8 @@ services:
       - "9999:9999"
   cwl_runner:
     image: jvsoest/converter
+    volumes:
+      - /Users/johan/Repositories/DataFAIRifier/clinical-data-workflow/workflows/data/:/data/
     links:
       - cwl_blazegraph:blazegraph
       - cwl_postgres:postgresdb
