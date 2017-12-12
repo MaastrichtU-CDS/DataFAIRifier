@@ -39,7 +39,7 @@ services:
   cwl_postgres:
     image: postgres
     volumes:
-      - /Users/johan/Repositories/DataFAIRifier/clinical-data-workflow/workflows/psql_init/:/docker-entrypoint-initdb.d/
+      - ../clinical-data-workflow/workflows/psql_init/:/docker-entrypoint-initdb.d/
     environment:
       - POSTGRES_PASSWORD=postgres
   cwl_blazegraph:
@@ -49,7 +49,7 @@ services:
   cwl_runner:
     image: jvsoest/converter
     volumes:
-      - /Users/johan/Repositories/DataFAIRifier/clinical-data-workflow/workflows/data/:/data/
+      - ../clinical-data-workflow/workflows/data/:/data/
     links:
       - cwl_blazegraph:blazegraph
       - cwl_postgres:postgresdb
