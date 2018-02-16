@@ -1,0 +1,7 @@
+ktr_file_location:
+    class: File
+    path: load_csv_to_db.ktr
+
+#other (mostly fixed) parameters
+pdi_log_level: /level:Detailed
+pdi_logfile: /logfile:logger.log
