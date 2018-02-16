@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services:
   postgres:
     image: postgres
@@ -13,5 +13,13 @@ services:
       context: cwl_runner
     volumes:
       - ../clinical-data-workflow/workflows/data/:/data/
+    links:
+      - postgres:postgresdb
+  virtuoso:
+    build:
+      context: docker-virtuoso
+    ports:
+      - "1111:1111"
+      - "8890:8890"
     links:
       - postgres:postgresdb
