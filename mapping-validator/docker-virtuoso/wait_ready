@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if ! isql-vt "EXEC=CONNECT;" >& /dev/null ; then
+	echo -n "waiting for virtuoso to accept connections "
+	while ! isql-vt "EXEC=CONNECT;" >& /dev/null ; do echo -n "." ; sleep 1 ; done
+	echo " done."
+fi

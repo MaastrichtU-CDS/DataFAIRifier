@@ -1,0 +1,493 @@
+@prefix :       <http://www.cancerdata.org/roo/>.
+@prefix icd:    <http://purl.bioontology.org/ontology/ICD10/>.
+@prefix icdcm:  <http://purl.bioontology.org/ontology/ICD10CM/>.
+@prefix map:    <#>.
+@prefix ncit:   <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
+@prefix rml:    <http://semweb.mmlab.be/ns/rml#>.
+@prefix roo:    <http://www.cancerdata.org/roo/>.
+@prefix rr:     <http://www.w3.org/ns/r2rml#>.
+@prefix time:   <http://www.w3.org/2006/time#>.
+@prefix uo:     <http://purl.obolibrary.org/obo/>.
+
+
+
+############################################
+# Gender
+############################################
+map:genders a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as gender_id, gender_class from public.thunder_view """ ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/gender_{id}";
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:type;
+        rr:objectMap [
+            rr:column "gender_class";
+            rr:termType rr:IRI;
+        ];
+    ].
+
+############################################
+# Disease
+############################################
+map:diseaseDateTime a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as disease_id, year_intake, month_intake, day_intake from public.thunder_view where ("Institute" = 1)""" ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/diseaseDateTime_{disease_date_id}";
+        rr:class time:DateTimeDescription;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate time:day;
+        rr:objectMap [
+            rr:column "day_intake";
+            rr:termType rr:Literal;
+            rr:datatype <http://www.w3.org/2001/XMLSchema#string>
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate time:month;
+        rr:objectMap [
+            rr:column "month_intake";
+            rr:termType rr:Literal;
+            rr:datatype <http://www.w3.org/2001/XMLSchema#string>
+         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate time:year;
+        rr:objectMap [
+            rr:column "year_intake";
+            rr:termType rr:Literal;
+            rr:datatype <http://www.w3.org/2001/XMLSchema#string>   
+        ];
+    ].
+
+map:diseases a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as disease_id, year_intake, month_intake, day_intake from public.thunder_view where ("Institute" = 1)""" ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/disease_{disease_id}";
+        rr:class icd:C20;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100041;
+        rr:objectMap [
+            rr:parentTriplesMap map:diseaseDateTime;
+            rr:joinCondition [
+                rr:child "disease_id";
+                rr:parent "disease_date_id";
+            ];
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100038; #is_when
+        rr:objectMap [
+            rr:parentTriplesMap map:patientEcogResource;
+            rr:joinCondition [
+                rr:child "disease_id";
+                rr:parent "ecog_id";
+            ];
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100243;
+        rr:objectMap [
+            rr:parentTriplesMap map:clinTnmResource;
+            rr:joinCondition [
+                rr:child "disease_id";
+                rr:parent "clin_tm_id";
+            ];
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100287;
+        rr:objectMap [
+            rr:parentTriplesMap map:pathTnmResource;
+            rr:joinCondition [
+                rr:child "disease_id";
+                rr:parent "path_tm_id";
+            ];
+        ]
+    ].
+
+############################################
+# Age at start treatment
+############################################
+map:age_start_age_unit a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as age_start_unit_id, age_at_start_rt from thunder_view""" ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/ageStartRtUnit_{id}";
+        rr:class uo:UO_0000036;
+    ].
+
+map:age_start_age_object a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as age_start_id, age_at_start_rt from thunder_view""" ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/ageStartRT_{age_start_id}";
+        rr:class roo:100003;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100042;
+        rr:objectMap [ rr:column "age_at_start_rt" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100027;
+        rr:objectMap [
+            rr:parentTriplesMap map:age_start_age_unit;
+            rr:joinCondition [
+                rr:child "age_start_id";
+                rr:parent "age_start_unit_id";
+            ];
+        ]
+    ].
+
+
+############################################
+# Age at diagnosis
+############################################
+map:age_diag_age_unit a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as age_diag_unit_id, age_at_diagnosis from thunder_view where ("Institute" = 1)""" ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/ageDiagnosisUnit_{age_diag_unit_id}";
+        rr:class uo:UO_0000036;
+    ].
+
+map:age_diag_age_object a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select age_diag_id, age_at_diagnosis from thunder_view where ("Institute" = 1)""" ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/ageDiagnosis_{age_diag_id}";
+        rr:class roo:100002;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100042;
+        rr:objectMap [ rr:column "age_at_diagnosis" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100027;
+        rr:objectMap [
+            rr:parentTriplesMap map:age_diag_age_unit;
+            rr:joinCondition [
+                rr:child "age_diag_id";
+                rr:parent "age_diag_unit_id";
+            ];
+        ]
+    ].
+
+############################################
+# Patient
+############################################
+map:patients a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as patient_id from public.thunder """;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/patient_{patient_id}";
+        rr:class ncit:C16960;
+    ];
+    # Disease
+    rr:predicateObjectMap [
+        rr:predicate roo:100008;
+        rr:objectMap [
+            rr:parentTriplesMap map:diseases;
+            rr:joinCondition [
+                rr:child "patient_id";
+                rr:parent "disease_id";
+            ];
+        ];
+    ];
+    # Gender
+    rr:predicateObjectMap [
+        rr:predicate roo:100018;
+        rr:objectMap [
+            rr:parentTriplesMap map:genders;
+            rr:joinCondition [
+                rr:child "patient_id";
+                rr:parent "gender_id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100017;
+        rr:objectMap [
+            rr:parentTriplesMap map:age_start_age_object;
+            rr:joinCondition [
+                rr:child "patient_id";
+                rr:parent "age_start_id";
+            ];
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100016;
+        rr:objectMap [
+            rr:parentTriplesMap map:age_diag_age_object;
+            rr:joinCondition [
+                rr:child "patient_id";
+                rr:parent "age_diag_id";
+            ];
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100218;
+        rr:objectMap [
+            rr:parentTriplesMap map:patientEcogResource;
+            rr:joinCondition [
+                rr:child "patient_id";
+                rr:parent "ecog_id";
+            ];
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100301;
+        rr:objectMap [
+            rr:parentTriplesMap map:sbrtResource;
+            rr:joinCondition [
+                rr:child "patient_id";
+                rr:parent "sbrt_id";
+            ];
+        ]
+    ].
+
+############################################
+# Treating hospital
+############################################
+map:hospital a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as patient_id, institute_url from public.thunder_view """ ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/patient_{patient_id}";
+        rr:class ncit:C16960;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100039;
+        rr:objectMap [
+            rr:column "institute_url";
+            rr:termType rr:IRI;
+        ];
+    ].
+
+############################################
+# ECOG performance status
+############################################
+map:patientEcogResource a rr:TriplesMap;
+	rr:logicalTable [
+        rr:sqlQuery """select id as ecog_id, who_class from public.thunder_view where who_class is not null """ ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/ecog_{ecog_id}";
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:type;
+        rr:objectMap [
+            rr:column "who_class";
+            rr:termType rr:IRI;
+        ];
+    ].
+
+
+############################################
+# Clinical TNM stage
+############################################
+map:clinTnmResource a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as clin_tm_id from public.thunder """;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/clinTNM_{id}";
+        rr:class ncit:C48881;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100244;
+        rr:objectMap [
+            rr:parentTriplesMap map:diseaseClinTResource;
+            rr:joinCondition [
+                rr:child "clin_tm_id";
+                rr:parent "clin_t_id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100242;
+        rr:objectMap [
+            rr:parentTriplesMap map:diseaseClinNResource;
+            rr:joinCondition [
+                rr:child "clin_tm_id";
+                rr:parent "clin_n_id";
+            ];
+        ];
+    ].
+
+#create a T-stage resource
+map:diseaseClinTResource a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as clin_t_id, ct_class from public.thunder_view where ct_class is not null """ ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/clinTStage_{clin_t_id}";
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:type;
+        rr:objectMap [
+            rr:column "ct_class";
+            rr:termType rr:IRI;
+        ];
+    ].
+
+#create a N-stage resource
+map:diseaseClinNResource a rr:TriplesMap;
+    rr:logicalTable [
+        rr:sqlQuery """select id as clin_n_id, cn_class from public.thunder_view where cn_class is not null """ ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/clinNStage_{clin_n_id}";
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:type;
+        rr:objectMap [
+            rr:column "cn_class";
+            rr:termType rr:IRI;
+        ];
+    ].
+
+############################################
+# Clinical TNM path
+############################################
+map:pathTnmResource a rr:TriplesMap;
+	rr:logicalTable [
+        rr:sqlQuery """select id as path_tm_id from public.thunder """;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/pathTNM_{path_tm_id}";
+        rr:class ncit:C48739;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100288;
+        rr:objectMap [
+            rr:parentTriplesMap map:diseasePathTResource;
+            rr:joinCondition [
+                rr:child "path_tm_id";
+                rr:parent "path_t_id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100286;
+        rr:objectMap [
+            rr:parentTriplesMap map:diseasePathNResource;
+            rr:joinCondition [
+                rr:child "path_tm_id";
+                rr:parent "path_n_id";
+            ];
+        ];
+    ].
+	
+map:diseasePathTResource a rr:TriplesMap;
+	rr:logicalTable [
+        rr:sqlQuery """select id as path_t_id, pt_class from public.thunder_view where pt_class is not null """ ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/pathTStage_{path_t_id}";
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:type;
+        rr:objectMap [
+            rr:column "pt_class";
+            rr:termType rr:IRI;
+        ];
+    ].
+
+map:diseasePathNResource a rr:TriplesMap;
+	rr:logicalTable [
+        rr:sqlQuery """select id as path_n_id, pn_class from public.thunder_view where pn_class is not null """ ;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/pathNStage_{path_n_id}";
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdf:type;
+        rr:objectMap [
+            rr:column "pn_class";
+            rr:termType rr:IRI;
+        ];
+    ].
+
+############################################
+# Add radiation treatment
+############################################
+map:sbrtResource a rr:TriplesMap;
+	rr:logicalTable [
+        rr:sqlQuery """select id as sbrt_id from public.thunder """;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/rt_{sbrt_id}";
+        rr:class ncit:C15313;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100023;
+        rr:objectMap [
+            rr:parentTriplesMap map:prescribedSbrtDoseResource;
+            rr:joinCondition [
+                rr:child "sbrt_dose_id";
+                rr:parent "sbrt_id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100402;
+        rr:objectMap [
+            rr:parentTriplesMap map:diseases;
+            rr:joinCondition [
+                rr:child "disease_id";
+                rr:parent "sbrt_id";
+            ];
+        ]
+    ].
+
+#create prescribed dose resource therapy object
+map:prescribedSbrtDoseResource a rr:TriplesMap;
+	rr:logicalTable [
+        rr:sqlQuery """select id as sbrt_dose_id from public.thunder """;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/prescribedDose_{sbrt_dose_id}";
+        rr:class roo:100013;
+    ];
+    rr:predicateObjectMap [
+	    rr:predicate roo:100042;
+        rr:objectMap [
+            rr:column "TotalDose";
+            rr:datatype <http://www.w3.org/2001/XMLSchema#double>
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:100027;
+        rr:objectMap [
+            rr:parentTriplesMap map:prescribedSbrtDoseUnitResource;
+            rr:joinCondition [
+                rr:child "sbrt_unit_id";
+                rr:parent "sbrt_dose_id";
+            ];
+        ];
+    ].
+
+#create gray resource therapy object
+map:prescribedSbrtDoseUnitResource a rr:TriplesMap;
+	rr:logicalTable [
+        rr:sqlQuery """select id as sbrt_unit_id from public.thunder """;
+    ];
+    rr:subjectMap [
+        rr:template "http://www.cancerdata.org/roo/prescribedDoseUnit_{sbrt_unit_id}";
+        rr:class uo:UO_0000134;
+    ].
