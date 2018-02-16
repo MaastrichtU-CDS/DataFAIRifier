@@ -23,3 +23,12 @@ services:
       - "8890:8890"
     links:
       - postgres:postgresdb
+  garlic:
+    build:
+      context: garlic
+    ports:
+      - "8888:8888"
+      - "8088:8088"
+    links:
+      - postgres:postgresdb
+      - virtuoso:sparql_endpoint
