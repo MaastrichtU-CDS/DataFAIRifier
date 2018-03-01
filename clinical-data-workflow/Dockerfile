@@ -1,37 +1,30 @@
-FROM datafairifier/baseimage
+FROM maven:3.5.2-jdk-8
 
-# Define build packages here so we can remove them later
-ENV BUILD_PACKAGES="wget"
-ENV INSTALL_HOME="/opt"
+RUN apt-get update && apt-get install -y python-pip
+RUN pip install requests
 
-# Set the front-end to noninteractive so debconf does not complain
-ENV DEBIAN_FRONTEND noninteractive
+RUN git clone https://github.com/jvsoest/r2rml.git
 
-COPY workflows/d2r_tool.cwl.yml d2r_tool.cwl.yml
-COPY workflows/pentaho_tool.cwl.yml pentaho_tool.cwl.yml
-COPY workflows/curl.cwl.yml curl.cwl.yml
-COPY workflows/workflow.cwl.yml workflow.cwl.yml
+RUN cd /r2rml && \
+    git fetch && \
+    git checkout OracleIgnore && \
+    mvn package && \
+    mvn dependency:copy-dependencies
 
-COPY workflows/load_csv_to_db.ktr load_csv_to_db.ktr
-COPY workflows/settings_cwl.yml settings_cwl.yml
+RUN cd /r2rml/target && \
+    cp r2rml.jar /r2rml.jar && \
+    cp -R dependency/ /dependency/
 
-COPY workflows/registry_mapping.ttl registry_mapping.ttl
+RUN mkdir /config
 
-COPY workflows/data/thunderSubSet.csv thunderSubSet.csv
+COPY run.py /run.py
 
-# Switch to directory /opt
-WORKDIR /opt
+RUN echo "while true" >> /run.sh
+RUN echo "do " >> /run.sh
+RUN echo "  python run.py" >> /run.sh
+RUN echo "  sleep 60" >> /run.sh
+RUN echo "done" >> /run.sh
 
-COPY install.sh install.sh
-COPY pdi-ce-7.1.0.0-12.zip pdi-ce-7.1.0.0-12.zip
-COPY d2rq-0.8.3-dev.zip d2rq-0.8.3-dev.zip
+CMD ["sh", "run.sh"]
 
-# Make sure the file is executable
-RUN chmod +x install.sh
-
-RUN sh install.sh
-
-COPY run /etc/service/cwl_run/
-RUN chmod +x /etc/service/cwl_run/run
-
-EXPOSE 2020
+# docker build -t jvsoest/workflow ./

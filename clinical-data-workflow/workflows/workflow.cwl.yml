@@ -19,19 +19,19 @@ steps:
       pentaho_logging_level: pdi_log_level
       pentaho_logfile_location: pdi_logfile
     out: []
-  create_triples:
-    run: d2r_tool.cwl.yml
-    in:
-      d2r_base_uri: base_uri
-      d2r_mapping_file: d2r_mapping
-      verbose: d2r_verbose_output
-    out: [d2r_out]
-  upload_triples:
-    run: curl.cwl.yml
-    in:
-      header_in: post_header
-      turtle_file_in: create_triples/d2r_out
-      sparql_endpoint_url: endpoint_url
+  # create_triples:
+  #   run: d2r_tool.cwl.yml
+  #   in:
+  #     d2r_base_uri: base_uri
+  #     d2r_mapping_file: d2r_mapping
+  #     verbose: d2r_verbose_output
+  #   out: [d2r_out]
+  # upload_triples:
+  #   run: curl.cwl.yml
+  #   in:
+  #     header_in: post_header
+  #     turtle_file_in: create_triples/d2r_out
+  #     sparql_endpoint_url: endpoint_url
     out: []
 
 outputs: []
