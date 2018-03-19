@@ -13,7 +13,7 @@ RUN jupyter nbextension enable --py widgetsnbextension
 RUN mkdir /queries
 ADD config.docker.ini /queries/config.ini
 ADD gunicorn_config.py /queries/
-# ADD *.rq /queries/
+ADD *.rq /queries/
 ADD *.ipynb /queries/
 
 WORKDIR /queries

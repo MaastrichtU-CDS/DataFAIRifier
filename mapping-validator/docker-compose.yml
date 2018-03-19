@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres
     volumes:
-      - ../mapping-validator/workflows/psql_init/:/docker-entrypoint-initdb.d/
+      - ../clinical-data-workflow/workflows/psql_init/:/docker-entrypoint-initdb.d/
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
@@ -15,14 +15,14 @@ services:
       - ../clinical-data-workflow/workflows/data/:/data/
     links:
       - postgres:postgresdb
-  virtuoso:
-    build:
-      context: docker-virtuoso
-    ports:
-      - "1111:1111"
-      - "8890:8890"
-    links:
-      - postgres:postgresdb
+#  virtuoso:
+#    build:
+#      context: docker-virtuoso
+#    ports:
+#      - "1111:1111"
+#      - "8890:8890"
+#    links:
+#      - postgres:postgresdb
   garlic:
     build:
       context: garlic
@@ -31,4 +31,4 @@ services:
       - "8088:8088"
     links:
       - postgres:postgresdb
-      - virtuoso:sparql_endpoint
+#      - virtuoso:sparql_endpoint

@@ -1,0 +1,11 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbpedia: <http://dbpedia.org/property/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?person ?name ?birthDate WHERE {
+  ?person a foaf:Person .
+  ?person dbo:birthName ?name .
+  ?person dbo:birthDate ?birthDate .
+  FILTER(STRLEN(STR(?birthDate)) >= 10) .
+}
+LIMIT 100
