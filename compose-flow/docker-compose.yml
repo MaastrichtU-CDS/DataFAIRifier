@@ -69,3 +69,12 @@ services:
       - rdf_store:graphdb
     volumes:
       - ../clinical-data-workflow/r2rml/:/config/
+  dvh_converter:
+    image: jvsoest/dvh
+    volumes:
+      - ./dicom_import:/_IMPORT/
+    environment:
+      - RDF4J_URL=http://graphdb
+      - DBNAME=dvh
+    links:
+      - rdf_store:graphdb
