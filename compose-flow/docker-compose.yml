@@ -74,7 +74,7 @@ services:
     volumes:
       - ./dicom_import:/_IMPORT/
     environment:
-      - RDF4J_URL=http://graphdb
-      - DBNAME=dvh
+      - "RDF4J_URL=http://graphdb:7200"
+      - "DBNAME=dvh"
     links:
       - rdf_store:graphdb
