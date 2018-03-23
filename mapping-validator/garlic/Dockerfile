@@ -11,10 +11,11 @@ RUN pip install psycopg2 sqlalchemy
 RUN jupyter nbextension enable --py widgetsnbextension
 
 RUN mkdir /queries
-ADD config.docker.ini /queries/config.ini
-ADD gunicorn_config.py /queries/
-ADD *.rq /queries/
-ADD *.ipynb /queries/
+# Instead of copy, use a mount
+#ADD config.docker.ini /queries/config.ini
+#ADD gunicorn_config.py /queries/
+#ADD *.rq /queries/
+#ADD *.ipynb /queries/
 
 WORKDIR /queries
 

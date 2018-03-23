@@ -29,6 +29,8 @@ services:
     ports:
       - "8888:8888"
       - "8088:8088"
+    volumes:
+      - ./garlic:/queries/
     links:
       - postgres:postgresdb
 #      - virtuoso:sparql_endpoint
