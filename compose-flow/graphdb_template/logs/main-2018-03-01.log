@@ -1,0 +1,146 @@
+[INFO ] 2018-03-01 16:30:49,462 [main | c.o.g.Config] Using 'jar:file:/opt/graphdb/dist/lib/graphdb-application-common-8.4.1.jar!/com/ontotext/graphdb/logback.xml' as logback's configuration file for graphdb
+[INFO ] 2018-03-01 16:30:49,896 [main | c.o.g.s.GraphDB] Starting GraphDB in workbench mode.
+[INFO ] 2018-03-01 16:31:00,526 [localhost-startStop-1 | c.o.g.Config] GraphDB Home directory: /opt/graphdb/home
+[INFO ] 2018-03-01 16:31:00,528 [localhost-startStop-1 | c.o.g.Config] GraphDB Config directory: /opt/graphdb/home/conf
+[INFO ] 2018-03-01 16:31:00,530 [localhost-startStop-1 | c.o.g.Config] GraphDB Data directory: /opt/graphdb/home/data
+[INFO ] 2018-03-01 16:31:00,531 [localhost-startStop-1 | c.o.g.Config] GraphDB Work directory: /opt/graphdb/home/work
+[INFO ] 2018-03-01 16:31:00,533 [localhost-startStop-1 | c.o.g.Config] GraphDB Logs directory: /opt/graphdb/home/logs
+[INFO ] 2018-03-01 16:31:13,060 [main | c.o.g.s.GraphDB] Started GraphDB in workbench mode at port 7200.
+[WARN ] 2018-03-01 16:31:14,286 [http-nio-7200-exec-1 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:14,415 [http-nio-7200-exec-3 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:16,032 [http-nio-7200-exec-8 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:18,031 [http-nio-7200-exec-10 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:20,065 [http-nio-7200-exec-6 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:22,039 [http-nio-7200-exec-3 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:24,041 [http-nio-7200-exec-2 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:26,034 [http-nio-7200-exec-9 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:28,040 [http-nio-7200-exec-10 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:30,054 [http-nio-7200-exec-4 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:32,040 [http-nio-7200-exec-3 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:34,043 [http-nio-7200-exec-7 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:36,046 [http-nio-7200-exec-5 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:38,044 [http-nio-7200-exec-1 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:40,054 [http-nio-7200-exec-4 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:42,049 [http-nio-7200-exec-3 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:42,547 [http-nio-7200-exec-4 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[INFO ] 2018-03-01 16:31:42,759 [repositories/data | o.e.r.h.s.ProtocolExceptionResolver] Client sent bad request ( 404)
+org.eclipse.rdf4j.http.server.ClientHTTPException: Unknown repository: data
+	at org.eclipse.rdf4j.http.server.repository.RepositoryInterceptor.setRequestAttributes(RepositoryInterceptor.java:110)
+	at org.eclipse.rdf4j.http.server.ServerInterceptor.preHandle(ServerInterceptor.java:34)
+	at org.eclipse.rdf4j.http.server.repository.RepositoryInterceptor.preHandle(RepositoryInterceptor.java:85)
+	at com.ontotext.forest.sesame.ForestRepositoryInterceptor.preHandle(ForestRepositoryInterceptor.java:38)
+	at com.ontotext.forest.sesame.ForestRepositoryInterceptor$$FastClassBySpringCGLIB$$d99bcd9f.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:717)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.aop.support.DelegatingIntroductionInterceptor.doProceed(DelegatingIntroductionInterceptor.java:133)
+	at org.springframework.aop.support.DelegatingIntroductionInterceptor.invoke(DelegatingIntroductionInterceptor.java:121)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:653)
+	at com.ontotext.forest.sesame.ForestRepositoryInterceptor$$EnhancerBySpringCGLIB$$5f4dce30.preHandle(<generated>)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:134)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:954)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:966)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:857)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:842)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at com.ontotext.forest.core.request.RequestFilter.doFilterInternal(RequestFilter.java:41)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at com.github.ziplet.filter.compression.CompressingFilter.doFilter(CompressingFilter.java:300)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at com.ontotext.forest.security.AdminDelegatingFilterProxy.doFilter(AdminDelegatingFilterProxy.java:29)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:344)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:261)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:522)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1095)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:672)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1500)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1456)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+[WARN ] 2018-03-01 16:31:44,082 [http-nio-7200-exec-7 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:46,065 [http-nio-7200-exec-8 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:48,061 [http-nio-7200-exec-9 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:50,089 [http-nio-7200-exec-5 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:31:52,482 [http-nio-7200-exec-4 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[INFO ] 2018-03-01 16:31:52,482 [repositories/data | o.e.r.h.s.ProtocolExceptionResolver] Client sent bad request ( 404)
+org.eclipse.rdf4j.http.server.ClientHTTPException: Unknown repository: data
+	at org.eclipse.rdf4j.http.server.repository.RepositoryInterceptor.setRequestAttributes(RepositoryInterceptor.java:110)
+	at org.eclipse.rdf4j.http.server.ServerInterceptor.preHandle(ServerInterceptor.java:34)
+	at org.eclipse.rdf4j.http.server.repository.RepositoryInterceptor.preHandle(RepositoryInterceptor.java:85)
+	at com.ontotext.forest.sesame.ForestRepositoryInterceptor.preHandle(ForestRepositoryInterceptor.java:38)
+	at com.ontotext.forest.sesame.ForestRepositoryInterceptor$$FastClassBySpringCGLIB$$d99bcd9f.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:717)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.aop.support.DelegatingIntroductionInterceptor.doProceed(DelegatingIntroductionInterceptor.java:133)
+	at org.springframework.aop.support.DelegatingIntroductionInterceptor.invoke(DelegatingIntroductionInterceptor.java:121)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:653)
+	at com.ontotext.forest.sesame.ForestRepositoryInterceptor$$EnhancerBySpringCGLIB$$5f4dce30.preHandle(<generated>)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:134)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:954)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:893)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:966)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:857)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:842)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at com.ontotext.forest.core.request.RequestFilter.doFilterInternal(RequestFilter.java:41)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at com.github.ziplet.filter.compression.CompressingFilter.doFilter(CompressingFilter.java:300)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at com.ontotext.forest.security.AdminDelegatingFilterProxy.doFilter(AdminDelegatingFilterProxy.java:29)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:344)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:261)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:522)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1095)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:672)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1500)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1456)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+[WARN ] 2018-03-01 16:32:00,663 [http-nio-7200-exec-9 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[WARN ] 2018-03-01 16:32:12,038 [http-nio-7200-exec-6 | c.o.f.c.s.SemanticDataManagement] You have a non existing repository 'data' in the headers. Continuing anyways...
+[INFO ] 2018-03-01 16:32:46,087 [Thread-2 | c.o.g.s.GraphDB] Stopping GraphDB.
+[INFO ] 2018-03-01 16:32:46,248 [localhost-startStop-2 | c.o.f.c.s.SemanticDataManagement] Shutting down current semantic location
