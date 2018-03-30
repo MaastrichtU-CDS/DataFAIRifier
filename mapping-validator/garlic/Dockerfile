@@ -10,6 +10,11 @@ RUN pip install jupyter ipywidgets matplotlib pandas
 RUN pip install psycopg2 sqlalchemy
 RUN jupyter nbextension enable --py widgetsnbextension
 
+WORKDIR /root
+
+RUN mkdir -p /.jupyter/custom/
+COPY custom.js /.jupyter/custom/
+
 RUN mkdir /queries
 # Instead of copy, use a mount
 #ADD config.docker.ini /queries/config.ini

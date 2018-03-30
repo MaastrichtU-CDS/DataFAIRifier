@@ -15,12 +15,14 @@ services:
       - ../clinical-data-workflow/workflows/data/:/data/
     links:
       - postgres:postgresdb
-#  virtuoso:
-#    build:
-#      context: docker-virtuoso
-#    ports:
-#      - "1111:1111"
-#      - "8890:8890"
+  virtuoso:
+    build:
+      context: docker-virtuoso
+    volumes:
+      - ../clinical-data-workflow/workflows/data/:/import/data/
+    ports:
+      - "1111:1111"
+      - "8890:8890"
 #    links:
 #      - postgres:postgresdb
   garlic:
