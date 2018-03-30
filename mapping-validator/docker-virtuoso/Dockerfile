@@ -7,7 +7,4 @@ COPY ./rdb2rdf_dav.vad /import/rdb2rdf_dav.vad
 
 RUN /etc/init.d/virtuoso-opensource-7 start \
 && isql-vt "EXEC=vad_install('/import/rdb2rdf_dav.vad');"\
-&& /etc/init.d/virtuoso-opensource-7 stop \
-&& rm /import/rdb2rdf_dav.vad
-
-
+&& /etc/init.d/virtuoso-opensource-7 stop
