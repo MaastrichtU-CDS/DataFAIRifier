@@ -1,1 +1,1 @@
-select id, dob from thunderset
+select * from CSV.DBA.thunderSubSet_clean_csv

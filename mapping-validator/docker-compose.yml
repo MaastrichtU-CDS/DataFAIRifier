@@ -35,4 +35,4 @@ services:
       - ./garlic:/queries/
     links:
       - postgres:postgresdb
-#      - virtuoso:sparql_endpoint
+      - virtuoso:sparql_endpoint

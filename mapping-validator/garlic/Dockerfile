@@ -1,19 +1,25 @@
 FROM python:2-slim
 
-# RUN apk update
-RUN apt-get update
-# RUN apk add git gcc python-dev musl-dev libzmq zeromq-dev libpng freetype-dev
-RUN apt-get install -y git gcc
+RUN apt-get update && apt-get install -y git build-essential unixodbc unixodbc-dev
 
+RUN pip install --upgrade pip
 RUN pip install git+https://github.com/c-martinez/grlc.git@candyGene
 RUN pip install jupyter ipywidgets matplotlib pandas
 RUN pip install psycopg2 sqlalchemy
 RUN jupyter nbextension enable --py widgetsnbextension
 
-WORKDIR /root
 
+COPY odbc /usr/lib/odbc/
+COPY odbc.ini /etc/odbc.ini
+
+WORKDIR /root
 RUN mkdir -p /.jupyter/custom/
 COPY custom.js /.jupyter/custom/
+
+RUN git clone https://github.com/maparent/virtuoso-python.git
+
+WORKDIR /root/virtuoso-python
+RUN pip install -r requirements.txt .
 
 RUN mkdir /queries
 # Instead of copy, use a mount

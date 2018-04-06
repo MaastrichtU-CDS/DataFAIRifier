@@ -10,9 +10,9 @@ RUN /etc/init.d/virtuoso-opensource-7 start \
 && /etc/init.d/virtuoso-opensource-7 stop
 
 
-COPY run_and_import.sh /
-RUN chmod +x /run_and_import.sh
+# COPY run_and_import.sh /
+# RUN chmod +x /run_and_import.sh
 
-COPY import_csv_data.isql /import/ 
+# COPY import_csv_data.isql /import/ 
 
-ENTRYPOINT ["/run_and_import.sh"]
+# ENTRYPOINT ["/run_and_import.sh"]
