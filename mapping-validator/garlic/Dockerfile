@@ -8,8 +8,7 @@ RUN pip install jupyter ipywidgets matplotlib pandas
 RUN pip install psycopg2 sqlalchemy
 RUN jupyter nbextension enable --py widgetsnbextension
 
-
-COPY odbc /usr/lib/odbc/
+COPY odbc /usr/lib/odbc
 COPY odbc.ini /etc/odbc.ini
 
 WORKDIR /root
