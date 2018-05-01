@@ -15,10 +15,10 @@ WORKDIR /root
 RUN mkdir -p /.jupyter/custom/
 COPY custom.js /.jupyter/custom/
 
-RUN git clone https://github.com/maparent/virtuoso-python.git
+#RUN git clone https://github.com/maparent/virtuoso-python.git
 
-WORKDIR /root/virtuoso-python
-RUN pip install -r requirements.txt .
+#WORKDIR /root/virtuoso-python
+#RUN pip install -r requirements.txt .
 
 RUN mkdir /queries
 # Instead of copy, use a mount
