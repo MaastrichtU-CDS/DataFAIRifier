@@ -25,6 +25,13 @@ services:
       - "8890:8890"
     links:
       - postgres:postgresdb
+  r2rml:
+    image: jvsoest/workflow2
+    links:
+      - postgres:dbhost
+      - graphdb:graphdb
+    volumes:
+      - ./r2rml_config/:/config/
   garlic:
     build:
       context: garlic
