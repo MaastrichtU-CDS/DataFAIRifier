@@ -3,3 +3,4 @@ compose-imaging-flow/storage/
 compose-flow/wildfly/*
 clinical-data-workflow/workflows/d2r_output.ttl
 .ipynb_checkpoints
+mapping-validator/graphdb_template/

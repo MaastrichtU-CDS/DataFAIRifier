@@ -23,8 +23,8 @@ services:
     ports:
       - "1111:1111"
       - "8890:8890"
-#    links:
-#      - postgres:postgresdb
+   links:
+     - postgres:postgresdb
   garlic:
     build:
       context: garlic
@@ -36,3 +36,17 @@ services:
     links:
       - postgres:postgresdb
       - virtuoso:sparql_endpoint
+      - graphdb:sparql_open
+  graphdb:
+    image: jvsoest/graphdb-free:8.4.1
+    ports: 
+      - "7200:7200"
+    volumes:
+      - ./graphdb_template/:/opt/graphdb/home/
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet:  192.169.230.1/24
