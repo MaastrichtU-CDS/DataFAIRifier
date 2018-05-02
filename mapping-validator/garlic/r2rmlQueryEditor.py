@@ -44,7 +44,7 @@ class R2RMLQueryEditor:
             SELECT ?queryId ?query ?definition
             WHERE {
                 ?queryId <http://www.w3.org/ns/r2rml#sqlQuery> ?query.
-                OPTIONAL { ?queryId <http://www.w3.org/2004/02/skos/core#defintition> ?definition }
+                OPTIONAL { ?queryId <http://www.w3.org/2004/02/skos/core#definition> ?definition }
             }
             """)
 
