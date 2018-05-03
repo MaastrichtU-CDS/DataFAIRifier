@@ -9,11 +9,15 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
 
+map:sqlQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id FROM export_set""";
+    skos:definition "This table should contain the columns named id. Every row in this table should correspond to a unique patient.".
+
 ###########################################
 # Add patient
 ###########################################
 map:patient a rr:TriplesMap;
-    rr:logicalTable [ rr:sqlQuery "select * from thunderset" ];
+    rr:logicalTable map:sqlQuery;
     rr:subjectMap [
         rr:template "patient/{id}";
         rr:class ncit:C16960;
