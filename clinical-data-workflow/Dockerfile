@@ -27,4 +27,4 @@ RUN echo "done" >> /run.sh
 
 CMD ["sh", "run.sh"]
 
-# docker build -t jvsoest/workflow ./
+# docker build -t jvsoest/workflow2 ./
