@@ -8,14 +8,15 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
-@prefix roo: <https://www.cancerdata.org/roo/>.
+@prefix roo: <http://www.cancerdata.org/roo/>.
 @prefix icd: <http://purl.bioontology.org/ontology/ICD10/>.
 @prefix skos: <http://www.w3.org/2008/05/skos#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 
 
 map:basicQuery a rr:LogicalTable;
     rr:sqlQuery """SELECT id, gender, ct as clinical_t, cn as clinical_n FROM thunderset""";
-    skos:definition """This table should contain the columns named id, gender and cT.<br/>
+    rdfs:label """This table should contain the columns named id, gender and cT.<br/>
 Every row in this table should correspond to a unique patient.<br/>
 The following variables have a specific meaning:
 <ul>
@@ -23,7 +24,8 @@ The following variables have a specific meaning:
 <li>gender: column identifying the patient's gender</li>
 <li>clinical_t: column identifying the patient's clinical <strong>tumor</strong> stage</li>
 <li>clinical_n: column identifying the patient's clinical <strong>nodal</strong> stage</li>
-</ul>""".
+</ul>""";
+    skos:definition "id,gender,clinical_t,clinical_n".
 
 ###########################################
 # Add patient
