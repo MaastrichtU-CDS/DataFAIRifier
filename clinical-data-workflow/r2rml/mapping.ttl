@@ -10,21 +10,26 @@
 @prefix ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
 @prefix roo: <https://www.cancerdata.org/roo/>.
 @prefix icd: <http://purl.bioontology.org/ontology/ICD10/>.
+@prefix skos: <http://www.w3.org/2008/05/skos#>.
 
 
-map:patientQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT id FROM thunderset""";
-    skos:definition "This table should contain the columns named id. Every row in this table should correspond to a unique patient.".
-
-map:genderQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT id AS gender_pt_id, gender FROM thunderset""";
-    skos:definition "This table should contain the columns named id. Every row in this table should correspond to a unique patient.".
+map:basicQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, gender, ct as clinical_t, cn as clinical_n FROM thunderset""";
+    skos:definition """This table should contain the columns named id, gender and cT.<br/>
+Every row in this table should correspond to a unique patient.<br/>
+The following variables have a specific meaning:
+<ul>
+<li>id: unique identifier of the patient</li>
+<li>gender: column identifying the patient's gender</li>
+<li>clinical_t: column identifying the patient's clinical <strong>tumor</strong> stage</li>
+<li>clinical_n: column identifying the patient's clinical <strong>nodal</strong> stage</li>
+</ul>""".
 
 ###########################################
 # Add patient
 ###########################################
-map:patient a rr:TriplesMap;
-    rr:logicalTable map:patientQuery;
+map:patient a rr:basicQuery;
+    rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}";
         rr:class ncit:C16960;
@@ -37,18 +42,28 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:100018;
+        rr:predicate roo:P100018;
         rr:objectMap [ 
             rr:parentTriplesMap map:gender;
             rr:joinCondition [
-                rr:child "gender_pt_id";
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100008;
+        rr:objectMap [ 
+            rr:parentTriplesMap map:disease;
+            rr:joinCondition [
+                rr:child "id";
                 rr:parent "id";
             ];
         ];
     ].
 
 map:gender a rr:TriplesMap;
-    rr:logicalTable map:genderQuery;
+    rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/gender";
         rr:class ncit:C28421;
@@ -57,6 +72,85 @@ map:gender a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "gender"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+
+##########################################
+# Disease
+##########################################
+map:disease a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/disease";
+        rr:class ncit:C20;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100243;
+        rr:objectMap [ 
+            rr:parentTriplesMap map:clinTnm;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+######
+# Clinical TNM
+######
+map:clinTnm a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/disease/clinTnm";
+        rr:class ncit:C48881;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100244;
+        rr:objectMap [ 
+            rr:parentTriplesMap map:clinTnmT;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100242;
+        rr:objectMap [ 
+            rr:parentTriplesMap map:clinTnmN;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:clinTnmT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/disease/clinTnm/T";
+        rr:class ncit:C48885;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "clinical_t"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:clinTnmN a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/disease/clinTnm/N";
+        rr:class ncit:C48884;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "clinical_n"; 
             rr:datatype xsd:string;
         ];
     ].
