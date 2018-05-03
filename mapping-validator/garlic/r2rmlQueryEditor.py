@@ -4,6 +4,8 @@ import ipywidgets as widgets
 from IPython.display import clear_output
 import pandas as pd
 
+from comparisonEngine import ComparisonEngine
+
 class R2RMLQueryEditor:
     def __init__(self, repoUrl, dbEngine):
         self.myWidgets = [ ]
@@ -11,6 +13,7 @@ class R2RMLQueryEditor:
         self.myCheckButtons = dict()
         self.r2rmlRepo = repoUrl
         self.dbEngine = dbEngine
+        self.comparisonEngine = ComparisonEngine(dbEngine)
 
     def runQuery(self, endpointUrl, query):
         sparql = SPARQLWrapper(endpointUrl)
@@ -81,6 +84,7 @@ class R2RMLQueryEditor:
         
         try:
             sparql.query()
+            self.comparisonEngine.sqlQuery = sqlQuery
             print("Update executed. Please load this page again to make sure changes have applied to the database")
         except:
             print("Something went wrong during the update. Please check if the RDF repository is available.")
