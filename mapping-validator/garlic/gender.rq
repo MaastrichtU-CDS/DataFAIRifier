@@ -1,0 +1,8 @@
+PREFIX roo: <https://www.cancerdata.org/roo/>
+PREFIX ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>
+SELECT ?id ?gender ?genderValue
+WHERE {
+   ?id a ncit:C16960 .
+   ?id roo:P100018 ?gender .
+   ?gender roo:local_value ?genderValue .
+}
