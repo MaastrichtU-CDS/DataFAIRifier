@@ -1,0 +1,10 @@
+PREFIX roo: <http://www.cancerdata.org/roo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT DISTINCT ?type ?value
+from <http://data.local/rdf>
+WHERE {
+	?obj rdf:type ?type.
+    ?obj roo:local_value ?value .
+    FILTER(?type NOT IN (owl:NamedIndividual)).
+}
