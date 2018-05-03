@@ -7,7 +7,6 @@ from StringIO import StringIO
 
 from ipywidgets import interact, interactive, fixed, interact_manual
 from ipykernel.pylab.backend_inline import flush_figures
-from sqlalchemy import create_engine
 
 from resultWidget import ResultWidget
 
