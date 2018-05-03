@@ -7,7 +7,6 @@ from StringIO import StringIO
 
 from ipywidgets import interact, interactive, fixed, interact_manual
 from ipykernel.pylab.backend_inline import flush_figures
-from sqlalchemy import create_engine
 
 from resultWidget import ResultWidget
 
@@ -16,7 +15,7 @@ class ComparisonEngine:
         self.dbEngine = engine
         self.query_base_path = query_base_path
         self.base_url = base_url
-
+        self.sqlQuery = None
         self.plot_kinds = ['line', 'bar', 'hist', 'box', 'density', 'area', 'scatter', 'hexbin', 'pie']
 
     def callAPI(self, query, params={}, parse_dates=None):
@@ -32,19 +31,15 @@ class ComparisonEngine:
         df = self.callAPI('/' + name, params={}, parse_dates=parse_dates)
         return df
 
-    def getSqlQuery(self, name):
-        with open(self.query_base_path+name+'.sql') as sqlFile:
-            sqlQuery = sqlFile.read()
-        return sqlQuery
-
     def getSqlResult(self, name, parse_dates=None):
-        query = self.getSqlQuery(name)
-        return pd.read_sql_query(query, self.dbEngine, parse_dates=parse_dates)
+        return pd.read_sql_query(self.sqlQuery, self.dbEngine, parse_dates=parse_dates)
 
     def getSqlResultByQuery(self, query):
         return pd.read_sql_query(query, self.dbEngine)
 
     def loadDatasets(self, name, sqlDateColumns=None, sparqlDateColumns=None):
+        if self.sqlQuery is None:
+            raise Exception("sqlQuery has not yet been saved!")
         sql = self.getSqlResult(name, parse_dates=sqlDateColumns)
         
         sparql = self.getSparqlResult(name, parse_dates=sparqlDateColumns)

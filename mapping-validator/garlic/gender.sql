@@ -1,1 +1,0 @@
-select id, gender from thunderset
