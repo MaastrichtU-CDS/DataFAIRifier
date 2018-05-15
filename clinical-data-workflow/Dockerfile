@@ -18,12 +18,7 @@ RUN cd /r2rml/target && \
 RUN mkdir /config
 
 COPY run.py /run.py
-
-RUN echo "while true" >> /run.sh
-RUN echo "do " >> /run.sh
-RUN echo "  python run.py" >> /run.sh
-RUN echo "  sleep 60" >> /run.sh
-RUN echo "done" >> /run.sh
+COPY run.sh /run.sh
 
 CMD ["sh", "run.sh"]
 
