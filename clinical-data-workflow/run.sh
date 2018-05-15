@@ -1,25 +1,25 @@
 if [ -z "$SLEEPTIME" ]; then
-    SLEEPTIME = 60
+    SLEEPTIME=60
     echo "SLEEPTIME set to $SLEEPTIME seconds"
 fi
 
 if [ -z "$DB_JDBC" ]; then
-    DB_JDBC = "jdbc:postgresql://dbhost/mydata"
+    DB_JDBC="jdbc:postgresql://dbhost/mydata"
     echo "DB_JDBC set to $DB_JDBC"
 fi
 
 if [ -z "$DB_USER" ]; then
-    DB_USER = "postgres"
+    DB_USER="postgres"
     echo "DB_USER set to $DB_USER"
 fi
 
 if [ -z "$DB_PASS" ]; then
-    DB_PASS = "postgress"
+    DB_PASS="postgress"
     echo "DB_PASS set to $DB_PASS"
 fi
 
 if [ -z "$BASE_IRI" ]; then
-    BASE_IRI = "http://localhost/rdf/"
+    BASE_IRI="http://localhost/rdf/"
     echo "BASE_IRI set to $BASE_IRI"
 fi
 
