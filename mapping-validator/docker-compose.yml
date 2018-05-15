@@ -16,12 +16,10 @@ services:
     links:
       - postgres:postgresdb
   r2rml:
-    image: jvsoest/workflow2
+    image: jvsoest/r2rml
     links:
       - postgres:dbhost
       - graphdb:graphdb
-    volumes:
-      - ./r2rml_config/:/config/
   garlic:
     build:
       context: garlic
