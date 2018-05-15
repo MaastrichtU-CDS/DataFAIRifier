@@ -14,7 +14,7 @@ if [ -z "$DB_USER" ]; then
 fi
 
 if [ -z "$DB_PASS" ]; then
-    DB_PASS="postgress"
+    DB_PASS="postgres"
     echo "DB_PASS set to $DB_PASS"
 fi
 
