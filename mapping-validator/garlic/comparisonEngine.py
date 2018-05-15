@@ -46,10 +46,10 @@ class ComparisonEngine:
         
         return sql, sparql
 
-    def drawGraph(self, sqlX, sqlY, sparqlX, sparqlY, kind='hist', figsize=(12, 6)):
+    def drawGraph(self, sqlX, sqlY, sparqlX, sparqlY, kind='bar', figsize=(12, 6)):       
         fig, axes = plt.pyplot.subplots(1, 2, figsize=figsize)
-        self.sqlResult.plot(ax=axes[0], x=sqlX, y=sqlY , kind=kind)
-        self.sparqlResult.plot(ax=axes[1], x=sparqlX, y=sparqlY , kind=kind)
+        self.sqlResult[sqlY].value_counts().plot(ax=axes[0], kind=kind)
+        self.sparqlResult[sparqlY].value_counts().plot(ax=axes[1], kind=kind)
 
         axes[0].set_title("SQL Result Graph: " + sqlY)
         axes[1].set_title("SPARQL Result Graph: " + sparqlY)
