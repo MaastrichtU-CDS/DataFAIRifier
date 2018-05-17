@@ -27,20 +27,19 @@ class R2RMLQueryEditor:
         myOutputBox = updateSet["output"]
         columnDef = updateSet["definition"]
 
-        myOutputBox.clear_output()
+        myOutputBox.value = ""
 
-        with myOutputBox:
-            try:
-                sqlResult = pd.read_sql_query(sqlQuery, self.dbEngine)
+        try:
+            sqlResult = pd.read_sql_query(sqlQuery, self.dbEngine)
 
-                print("SQL Count: ", sqlResult.shape[0])
-                print("Expected columns: ", columnDef)
-                for column in columnDef.split(","):
-                    if (column not in sqlResult.columns.values):
-                        print("Error: expected column ", column, " in the result, but it could not be found!")
-                print(sqlResult)
-            except Exception as e:
-                print("Exception occured during query:", e)
+            myOutputBox.value += "<p>SQL Count: {}</p>".format(sqlResult.shape[0])
+            myOutputBox.value += "<p>Expected columns: {}</p>".format(columnDef)
+            for column in columnDef.split(","):
+                if (column not in sqlResult.columns.values):
+                    myOutputBox.value += "Error: expected column {} in the result, but it could not be found!".format(column)
+            myOutputBox.value += sqlResult.to_html()
+        except Exception as e:
+            myOutputBox.value += "Exception occured during query: {}".format(e)
 
     def run_query_check_silent(self, query, columnDef):
         errors = False
@@ -88,9 +87,44 @@ class R2RMLQueryEditor:
             print("Update executed. Please load this page again to make sure changes have applied to the database")
         except:
             print("Something went wrong during the update. Please check if the RDF repository is available.")
-                
+
+    def updateTableColumnBox(self, table):
+        columns = self.comparisonEngine.getTableColumns(table)
+
+        self.columns = pd.DataFrame(columns, columns=['Name', 'Type'])
+        self.columns.set_index('Name', inplace=True)
+        self.columnBox.value = """<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>"""
+        self.columnBox.value += self.columns.to_html()
+
 
     def runInterface(self):
+        tables = self.comparisonEngine.getTables()
+        self.columnBox = widgets.HTML(layout=widgets.Layout(flex='1 1 auto', width='auto'))
+        self.columnBox.add_class('rendered_html')
+
+        table_widget = widgets.Dropdown(
+            options=tables,
+            value=tables[0],
+            description='Table',
+            disabled=False,
+            layout=widgets.Layout(flex='1 1 auto', width='auto')
+        )
+
+        table_widget.observe(self.updateTableColumnBox, names='value')
+        self.updateTableColumnBox(tables[0])
+
         queries = self.runQuery(self.r2rmlRepo, 
             """
             SELECT ?queryId ?query ?definition ?label
@@ -106,9 +140,11 @@ class R2RMLQueryEditor:
                             value=result["query"]['value'],
                             placeholder=result["queryId"]['value'],
                             disabled=False,
-                            rows=10,
+                            rows=self.columns.size / 2,
+                            layout=widgets.Layout(flex='1 1 auto', width='auto')
                         )
-            myDescription = widgets.HTML(value=("<p>" + result["label"]['value'] + "</p>"))
+            myDescription = widgets.HTML(value=("<p>" + result["label"]['value'] + "</p>"),
+                                         layout=widgets.Layout(flex='1 1 auto', width='auto', padding='0px 15px'))
             myButton = widgets.Button(
                             description='Save',
                             disabled=False,
@@ -122,21 +158,30 @@ class R2RMLQueryEditor:
                             disabled=False,
                             icon='check'
                         )
-            myOutputBox = widgets.Output(layout={'border': '1px solid black'})
+            myOutputBox = widgets.HTML(layout=widgets.Layout(flex='1 1 auto', width='auto', border= '1px solid black', margin='10px 0px'))
+            myOutputBox.add_class('rendered_html')
             self.myCheckButtons[checkButton] = {"textBox": myTextBox, "output": myOutputBox, "definition":  result["definition"]['value'] }
             checkButton.on_click(self.run_query_check)
 
             self.myWidgets.append(
-                widgets.HBox([
-                    myTextBox,
-                    widgets.VBox([
+                widgets.VBox([
+                    widgets.HBox([
+                        widgets.VBox([
+                            table_widget,
+                            self.columnBox,
+                        ],
+                        layout=widgets.Layout(flex='1 1 auto', width='auto')),
+                        widgets.VBox([
                             myDescription,
+                            myTextBox,
                             widgets.HBox([
                                 checkButton,
                                 myButton
                             ])
+                        ],
+                        layout=widgets.Layout(flex='1 1 auto', width='auto')),
                     ]),
+                    myOutputBox
                 ])
             )
-            self.myWidgets.append(myOutputBox)
         return self.myWidgets

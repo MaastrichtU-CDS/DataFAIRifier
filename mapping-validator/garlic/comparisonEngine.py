@@ -9,6 +9,7 @@ from ipywidgets import interact, interactive, fixed, interact_manual
 from ipykernel.pylab.backend_inline import flush_figures
 
 from resultWidget import ResultWidget
+import sqlalchemy
 
 class ComparisonEngine:
     def __init__(self, engine, query_base_path = '/queries/', base_url = 'http://localhost:8088/api/local/local'):
@@ -17,6 +18,11 @@ class ComparisonEngine:
         self.base_url = base_url
         self.sqlQuery = None
         self.plot_kinds = ['line', 'bar', 'hist', 'box', 'density', 'area', 'scatter', 'hexbin', 'pie']
+        self.sqlResult = None
+        self.sparqlResult = None
+
+        self.metadata = sqlalchemy.MetaData()
+        self.metadata.reflect(self.dbEngine)
 
     def callAPI(self, query, params={}, parse_dates=None):
         headers = {"Accept": "text/csv"}
@@ -63,6 +69,12 @@ class ComparisonEngine:
                                            sparqlX=self.sparqlWidgets.x_widget, sparqlY=self.sparqlWidgets.y_widget,
                                            kind=self.plot_kinds, figsize=fixed(figsize))
         
+    def getTables(self):
+        return self.metadata.tables.keys()
+
+    def getTableColumns(self, table):
+        t = self.metadata.tables[table]
+        return [(c.name, c.type) for c in t.columns]
 
     def load(self, sparqlName, sqlDateColumns=[], sparqlDateColumns=[]):
         self.sqlResult, self.sparqlResult = self.loadDatasets(sparqlName, sqlDateColumns=[], sparqlDateColumns=[])
