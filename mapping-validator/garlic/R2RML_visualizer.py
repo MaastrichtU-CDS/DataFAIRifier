@@ -1,12 +1,14 @@
 import rdflib
+from SPARQLWrapper import SPARQLWrapper
 from graphviz import Digraph
 
 class R2RML_visualizer:
-    def __init__(self, namespaces=None, loadTerminologies=None):
+    def __init__(self, loadNamespaces=None, loadTerminologies=None, excludePredicates=None):
         self.termStore = rdflib.Graph()
-        self.rmlStore = None
+        self.rmlStore = rdflib.Graph()
         self.rdfStore = None
         self.graph = None
+        self.excludedLiteralPredicates = [ ]
         self.namespaces = {
             "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#": "ncit:",
             "http://www.cancerdata.org/roo/": "roo:",
@@ -15,15 +17,19 @@ class R2RML_visualizer:
             "http://www.w3.org/2001/XMLSchema#": "xsd:",
             "http://www.w3.org/2000/01/rdf-schema#": "rdfs:"
         }
-        if namespaces is not None:
-            self.namespaces = ns
+        if loadNamespaces is not None:
+            self.namespaces = loadNamespaces
         
         if loadTerminologies is not None:
             for url in loadTerminologies:
                 self.termStore.load(url)
+        
+        if excludePredicates is not None:
+            self.excludedLiteralPredicates = excludePredicates
     
-    def loadScript(self, fileLocation):
-        self.rmlStore = rdflib.Graph()
+    def loadScript(self, fileLocation, clear=False):
+        if(clear):
+            self.rmlStore = rdflib.Graph()
         self.rmlStore.parse(fileLocation, format="n3")
         
     def uploadR2RML(self, endpointUrl):
@@ -145,21 +151,22 @@ class R2RML_visualizer:
         mapClass = self.replaceToNamespace(node["map"])
         targetClass = self.replaceToNamespace(node["mapClass"])
         targetClassLabel = self.getLabelForUri(node["mapClass"])
-        self.graph.node(mapClass, targetClassLabel+"["+targetClass+"]")
+        self.graph.node(mapClass, targetClassLabel+"\n["+targetClass+"]")
     
     def plotPredicatObjectForNode(self, node, predicateObject):
         mapClass = self.replaceToNamespace(node["map"])
         predicateUri = self.replaceToNamespace(predicateObject["predicate"])
         predicateLabel = self.getLabelForUri(predicateObject["predicate"])
         objClass = self.replaceToNamespace(predicateObject["otherMap"])
-        self.graph.edge(mapClass, objClass, predicateLabel+"["+predicateUri+"]")
+        self.graph.edge(mapClass, objClass, predicateLabel+"\n["+predicateUri+"]")
     
     def plotPredicateLiteralForNode(self, node, predicateLiteral):
         mapClass = self.replaceToNamespace(node["map"])
         predicateUri = self.replaceToNamespace(predicateLiteral["predicate"])
-        predicateLabel = self.getLabelForUri(predicateLiteral["predicate"])
-        literal = self.replaceToNamespace(predicateLiteral["literalType"])
-        
-        nodeName = mapClass+"_"+literal.replace(":","_")
-        self.graph.node(nodeName, "LITERAL\n["+literal+"]")
-        self.graph.edge(mapClass, nodeName, predicateLabel+"["+predicateUri+"]")
+        if predicateUri not in self.excludedLiteralPredicates:
+            predicateLabel = self.getLabelForUri(predicateLiteral["predicate"])
+            literal = self.replaceToNamespace(predicateLiteral["literalType"])
+            
+            nodeName = mapClass+"_"+literal.replace(":","_")
+            self.graph.node(nodeName, "LITERAL\n["+literal+"]")
+            self.graph.edge(mapClass, nodeName, predicateLabel+"\n["+predicateUri+"]")
