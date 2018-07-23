@@ -12,25 +12,31 @@
 @prefix icd: <http://purl.bioontology.org/ontology/ICD10/>.
 @prefix skos: <http://www.w3.org/2008/05/skos#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix uo: <http://purl.obolibrary.org/obo/>.
 
 
 map:basicQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT id, gender, ct as clinical_t, cn as clinical_n FROM thunderset""";
-    rdfs:label """This table should contain the columns named id, gender and cT.<br/>
-Every row in this table should correspond to a unique patient.<br/>
-The following variables have a specific meaning:
+    rr:sqlQuery """SELECT PatientID as id,  ROUND(CAST(Age as decimal),0) as age, Gender as sex, Clinical_T_Stage as clinical_t, Clinical_N_Stage as clinical_n,
+SurvivalTime as survival_time,DeadStatus as vital_status, 
+(CASE WHEN (CAST(SurvivalTime as decimal)>730) THEN 1 WHEN (CAST(SurvivalTime as decimal)<=730 AND DeadStatus='1') THEN 0 ELSE NULL END) AS survival_2y 
+FROM PBDWHackathon2018;""";
+    rdfs:label """Every row in this table should correspond to a unique patient.<br/>
+The target variables have the following name and specific meaning:
+The table should contain a unique patient identifier, age, sex, t-stage, n-stage, survival time in days and vital status at this time.<br/>
 <ul>
 <li>id: unique identifier of the patient</li>
-<li>gender: column identifying the patient's gender</li>
-<li>clinical_t: column identifying the patient's clinical <strong>tumor</strong> stage</li>
-<li>clinical_n: column identifying the patient's clinical <strong>nodal</strong> stage</li>
+<li>age:  patient's age at diagnosis</li>
+<li>sex:  patient's biological sex</li>
+<li>clinical_t: clinical <strong>tumor</strong> stage</li>
+<li>clinical_n: clinical <strong>nodal</strong> stage</li>
+<li>survival_2y: two year survival </li>
 </ul>""";
-    skos:definition "id,gender,clinical_t,clinical_n".
+    skos:definition "id,age,sex,clinical_t,clinical_n,survival_2y".
 
 ###########################################
 # Add patient
 ###########################################
-map:patient a rr:basicQuery;
+map:patient a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}";
@@ -62,22 +68,85 @@ map:patient a rr:basicQuery;
                 rr:parent "id";
             ];
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100311;
+        rr:objectMap [ 
+            rr:parentTriplesMap map:survival;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100000;
+        rr:objectMap [ 
+            rr:parentTriplesMap map:age;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
     ].
 
 map:gender a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/gender";
+        rr:template "patient/{id}/sex";
         rr:class ncit:C28421;
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "gender"; 
+            rr:column "sex"; 
             rr:datatype xsd:string;
         ];
     ].
 
+map:age a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/age";
+        rr:class roo:C100002;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100028;
+        rr:objectMap [ 
+            rr:parentTriplesMap map:age_unit;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ]; rr:predicateObjectMap [
+        rr:predicate roo:P100042;
+        rr:objectMap [
+            rr:column "age"; 
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:age_unit a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/age_unit";
+        rr:class uo:UO_0000036;
+    ].
+
+map:survival a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/survival_2y";
+        rr:class roo:C100014;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "survival_2y"; 
+            rr:datatype xsd:string;
+        ];
+    ].
 
 ##########################################
 # Disease
@@ -89,9 +158,19 @@ map:disease a rr:TriplesMap;
         rr:class ncit:C20;
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100243;
+        rr:predicate roo:P100025;
         rr:objectMap [ 
-            rr:parentTriplesMap map:clinTnm;
+            rr:parentTriplesMap map:clinT;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100025;
+        rr:objectMap [ 
+            rr:parentTriplesMap map:clinN;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -100,39 +179,12 @@ map:disease a rr:TriplesMap;
     ].
 
 ######
-# Clinical TNM
+# Clinical T
 ######
-map:clinTnm a rr:TriplesMap;
+map:clinT a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/disease/clinTnm";
-        rr:class ncit:C48881;
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100244;
-        rr:objectMap [ 
-            rr:parentTriplesMap map:clinTnmT;
-            rr:joinCondition [
-                rr:child "id";
-                rr:parent "id";
-            ];
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100242;
-        rr:objectMap [ 
-            rr:parentTriplesMap map:clinTnmN;
-            rr:joinCondition [
-                rr:child "id";
-                rr:parent "id";
-            ];
-        ];
-    ].
-
-map:clinTnmT a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "patient/{id}/disease/clinTnm/T";
+        rr:template "patient/{id}/disease/cT";
         rr:class ncit:C48885;
     ];
     rr:predicateObjectMap [
@@ -143,10 +195,13 @@ map:clinTnmT a rr:TriplesMap;
         ];
     ].
 
-map:clinTnmN a rr:TriplesMap;
+######
+# Clinical N
+######
+map:clinN a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/disease/clinTnm/N";
+        rr:template "patient/{id}/disease/cN";
         rr:class ncit:C48884;
     ];
     rr:predicateObjectMap [
