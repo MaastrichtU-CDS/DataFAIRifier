@@ -1,23 +1,36 @@
+PREFIX ncit:<http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>
 PREFIX roo: <http://www.cancerdata.org/roo/>
-PREFIX ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>
-SELECT ?id ?genderValue ?tnmTLocal ?tnmNLocal
-WHERE {
-   ?patient a ncit:C16960 .
-   
-   OPTIONAL {
-       ?patient roo:P100018 ?gender .
-       ?gender roo:local_value ?genderValue .
-   }
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?patient ?age ?sex ?cT ?cN ?survival_2y
+WHERE { 
+	?patient a ncit:C16960 ;
+     		roo:P100008 ?diseaseObj ;
+      		roo:P100311 ?survivalObj ;
+    		roo:P100018 ?sexObj ;
+       		roo:P100000 ?ageObj. 
     
-   ?patient roo:P100008 ?disease.
-   
-   OPTIONAL {
-       ?disease roo:P100243 ?tnmStage.
-       ?tnmStage roo:P100244 ?tnmT.
-       ?tnmT roo:local_value ?tnmTLocal.
-       OPTIONAL {
-           ?tnmStage roo:P100242 ?tnmN.
-           ?tnmN roo:local_value ?tnmNLocal.
-       }
-   }
+    #Age
+	?ageObj roo:P100042 ?age.    
+
+    #Survival
+	?survivalObj roo:local_value ?survival_2y.
+        
+    #Sex
+	?sexObj roo:local_value ?sex.
+    
+    
+    #Stage
+    ?diseaseObj 	roo:P100025 ?cTObj ;
+             	roo:P100025 ?cNObj.
+    
+    #Tstage
+    ?cTObj a ncit:C48885 ; 
+        	roo:local_value ?cT.
+    
+    #Nstage
+    ?cNObj 	a ncit:C48884 ;
+        	roo:local_value ?cN.
 }
