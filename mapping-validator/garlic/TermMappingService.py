@@ -12,10 +12,11 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 SELECT DISTINCT ?type ?value
 from <http://data.local/rdf>
+from <http://graphdb:7200/repositories/data/rdf-graphs/radiomics.local>
 WHERE {
 	?obj rdf:type ?type.
     ?obj roo:local_value ?value .
-    FILTER(?type NOT IN (owl:NamedIndividual)).
+    FILTER(?type NOT IN (owl:NamedIndividual, owl:Thing)).
 }
 ORDER BY ?type"""
         self.ontologyGraph = rdflib.Graph()
@@ -232,9 +233,11 @@ ORDER BY ?type"""
                             myButtonObjects["term"])
     
     def getLabelForClass(self, classUri):
+        
         myQuery = "SELECT ?label WHERE { <%s> rdfs:label ?label. }" % classUri
         for row in self.ontologyGraph.query(myQuery):
             return str(row.label)
+        return "noLabel"
         
     def initMappedValues(self):
         localMappings = self.getLocalMappings()
@@ -282,7 +285,8 @@ ORDER BY ?type"""
             valueWidget = widgets.Text(value=localValue, disabled=True, description=superClassName, style={"description_width": "initial"})
 
             # lookup subclasses (possible matching candidates)
-            myQuery = """
+            myQuery = """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                 SELECT ?subClass ?label 
                 WHERE { 
                     ?subClass rdfs:subClassOf* <%s>.
