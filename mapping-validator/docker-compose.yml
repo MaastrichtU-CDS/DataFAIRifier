@@ -8,13 +8,6 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "2345:5432"
-  cwl_runner:
-    build:
-      context: cwl_runner
-    volumes:
-      - ../clinical-data-workflow/workflows/data/:/data/
-    links:
-      - postgres:postgresdb
   r2rml:
     image: jvsoest/r2rml
     links:
@@ -30,14 +23,13 @@ services:
       - ./garlic:/queries/
     links:
       - postgres:postgresdb
-      - graphdb:sparql_open
       - graphdb:graphdb
   graphdb:
-    image: jvsoest/graphdb-free:8.4.1
+    image: jvsoest/graphdb-free:fairstation
     ports: 
       - "7200:7200"
-    volumes:
-      - ./graphdb_template/:/opt/graphdb/home/
+    # volumes:
+    #   - ./graphdb_template/:/opt/graphdb/home/
 networks:
   default:
     driver: bridge
