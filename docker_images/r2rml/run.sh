@@ -23,7 +23,7 @@ if [ -z "$BASE_IRI" ]; then
     echo "BASE_IRI set to $BASE_IRI"
 fi
 
-echo "connectionURL = $DB_JDBC" >> /config/r2rml.properties
+echo "connectionURL = $DB_JDBC" > /config/r2rml.properties
 echo "user = $DB_USER" >> /config/r2rml.properties
 echo "password = $DB_PASS" >> /config/r2rml.properties
 echo "mappingFile = /mapping.ttl" >> /config/r2rml.properties
