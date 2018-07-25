@@ -15,7 +15,7 @@ services:
       - graphdb:graphdb
   garlic:
     build:
-      context: garlic
+      context: notebooks
     ports:
       - "8888:8888"
       - "8088:8088"
