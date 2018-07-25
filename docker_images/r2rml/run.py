@@ -48,21 +48,14 @@ commitRequest = requests.put(transactionUrl + "?action=COMMIT")
 #####################
 # Load RDF store with new data
 #####################
-transactionRequest = requests.post(baseUrl + "/repositories/data/transactions", 
-    headers={
-        "Accept": "application/json"
-    }
-)
-transactionUrl = transactionRequest.headers["Location"]
 
 turtle = ""
 with open('/output.ttl', 'r') as myfile:
-    turtle=myfile.read().replace('\n', '')
+    turtle=myfile.read()
 
-loadRequest = requests.post(transactionUrl + "?action=UPDATE",
-    data=("update=INSERT { GRAPH <%s> { %s } } WHERE { } " % (localGraph, turtle)), 
+loadRequest = requests.post((baseurl + "/repositories/data/statements?context=%3C" + localGraph + "%3E"),
+    data=turtle, 
     headers={
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/x-turtle"
     }
 )
-commitRequest = requests.put(transactionUrl + "?action=COMMIT")
