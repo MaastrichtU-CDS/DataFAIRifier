@@ -53,7 +53,7 @@ turtle = ""
 with open('/output.ttl', 'r') as myfile:
     turtle=myfile.read()
 
-loadRequest = requests.post((baseurl + "/repositories/data/statements?context=%3C" + localGraph + "%3E"),
+loadRequest = requests.post((baseUrl + "/repositories/data/statements?context=%3C" + localGraph + "%3E"),
     data=turtle, 
     headers={
         "Content-Type": "application/x-turtle"
