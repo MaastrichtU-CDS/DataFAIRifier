@@ -28,6 +28,10 @@ services:
     image: jvsoest/graphdb-free:fairstation
     ports: 
       - "7200:7200"
+    environment:
+      - GDB_HEAP_SIZE=2g
+      - GDB_MIN_MEM=1g
+      - GDB_MAX_MEM=2g
     # volumes:
     #   - ./graphdb_template/:/opt/graphdb/home/
 networks:
