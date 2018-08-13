@@ -9,6 +9,7 @@ To run this DataFAIRifier, you need the following software installed on your com
 * Docker Compose
 
 ### Configuring the infrastructure
+The full docker-compose collection of containers is given in [docker-compose.yml](docker-compose.yml)
 The most minimalistic infrastructure can be executed by writing a docker-compose file (`docker-compose.yml`) with the following contents:
 ```
 version: "2"
