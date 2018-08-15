@@ -54,3 +54,6 @@ The following commands can help you as well:
 
 ### How to query and use GraphDB
 Regarding the use of GraphDb, please have a look at the [quick start guide](http://graphdb.ontotext.com/documentation/free/quick-start-guide.html#explore-your-data-and-class-relationships)
+
+## Frozen hackathon repositories
+* [PBDW2018](http://github.com/jvsoest/PBDW2018_hackathon)
