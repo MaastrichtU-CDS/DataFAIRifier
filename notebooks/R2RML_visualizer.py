@@ -1,4 +1,5 @@
 import rdflib
+import requests
 from SPARQLWrapper import SPARQLWrapper
 from graphviz import Digraph
 
@@ -42,6 +43,19 @@ class R2RML_visualizer:
         endpoint.method = "POST"
         try:
             endpoint.query()
+            print("Mapping succesfully uploaded")
+        except:
+            print("Something went wrong during upload.")
+    
+    def uploadTermStore(self, endpointUrl):
+        turtle = self.termStore.serialize(format='nt')
+        try:
+            loadRequest = requests.post(endpointUrl,
+                data=turtle, 
+                headers={
+                    "Content-Type": "text/turtle"
+                }
+            )
             print("Mapping succesfully uploaded")
         except:
             print("Something went wrong during upload.")
