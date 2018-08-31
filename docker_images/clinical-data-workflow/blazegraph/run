@@ -1,9 +1,0 @@
-#!/bin/sh
-
-#set java home
-JAVA_HOME="/jdk1.8.0_141"
-PATH="$PATH:$JAVA_HOME/bin"
-export JAVA_HOME PATH
-
-cd /
-exec java -jar blazegraph.jar $JAVA_SETTINGS
