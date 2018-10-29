@@ -1,4 +1,6 @@
 # DataFAIRifier
+The DataFAIRifier is a system that supports the creation and validation of mappings of relational data to ontologies. The system is packaged as a set of Docker images. The frontend of the system is implemented as Jupyter Notebook.
+
 This repository describes the bottom-up DataFAIRifier process, and FAIR (Findable, Accessible, Interoperable, Reusable) data station which will be setup when following the instructions.
 
 ## Getting started
@@ -54,3 +56,6 @@ The following commands can help you as well:
 
 ### How to query and use GraphDB
 Regarding the use of GraphDb, please have a look at the [quick start guide](http://graphdb.ontotext.com/documentation/free/quick-start-guide.html#explore-your-data-and-class-relationships)
+
+## Frozen hackathon repositories
+* [PBDW2018](http://github.com/jvsoest/PBDW2018_hackathon)
