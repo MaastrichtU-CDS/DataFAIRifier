@@ -11,8 +11,7 @@ class TermMappingService:
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 SELECT DISTINCT ?type ?value
-from <http://data.local/rdf>
-from <http://graphdb:7200/repositories/data/rdf-graphs/radiomics.local>
+FROM <http://www.ontotext.com/explicit>
 WHERE {
 	?obj rdf:type ?type.
     ?obj roo:local_value ?value .
