@@ -1,11 +1,12 @@
 import rdflib
 import requests
-from SPARQLWrapper import SPARQLWrapper
+from SPARQLWrapper import SPARQLWrapper, JSON
 from graphviz import Digraph
 
 class R2RML_visualizer:
-    def __init__(self, loadNamespaces=None, loadTerminologies=None, excludePredicates=None):
+    def __init__(self, loadNamespaces=None, loadTerminologies=None, excludePredicates=None, remoteTermEndpoint=None):
         self.termStore = rdflib.Graph()
+        self.remoteTermStore = remoteTermEndpoint
         self.rmlStore = rdflib.Graph()
         self.rdfStore = None
         self.graph = None
@@ -16,7 +17,8 @@ class R2RML_visualizer:
             "http://mapping.local/": "map_",
             "http://purl.obolibrary.org/obo/UO_": "UO:",
             "http://www.w3.org/2001/XMLSchema#": "xsd:",
-            "http://www.w3.org/2000/01/rdf-schema#": "rdfs:"
+            "http://www.w3.org/2000/01/rdf-schema#": "rdfs:",
+            "http://purl.bioontology.org/ontology/ICD10/": "icd:"
         }
         if loadNamespaces is not None:
             self.namespaces = loadNamespaces
@@ -146,14 +148,38 @@ class R2RML_visualizer:
         return res
     
     def getLabelForUri(self, uri, includeNewline=True):
-        res = self.rdfStore.query("""prefix rr: <http://www.w3.org/ns/r2rml#>
+        myQuery = """prefix rr: <http://www.w3.org/ns/r2rml#>
             prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
             SELECT ?uriLabel
             WHERE {
                 <%s> rdfs:label ?uriLabel.
-            }""" % str(uri))
+            }""" % str(uri)
+        
+        if (len(self.termStore)>0):
+            return self.getLabelForUriLocal(myQuery, includeNewline)
+        else:
+            if not self.remoteTermStore == None:
+                return self.getLabelForUriRemote(myQuery, self.remoteTermStore, includeNewline)
+    
+    def getLabelForUriRemote(self, myQuery, endpoint, includeNewline):
+        endpoint = SPARQLWrapper(endpoint)
+        endpoint.setQuery(myQuery)
+        endpoint.method = "POST"
+        endpoint.setReturnFormat(JSON)
+        results = endpoint.query().convert()
+
+        for result in results["results"]["bindings"]:
+            retVal = str(result["uriLabel"]["value"])
+            if includeNewline:
+                retVal + "\n"
+            return retVal
+        return ""
+    
+    def getLabelForUriLocal(self, myQuery, includeNewLine):
+        res = self.rdfStore.query(myQuery)
+        
         for row in res:
             retVal = str(row["uriLabel"])
             if includeNewline:
