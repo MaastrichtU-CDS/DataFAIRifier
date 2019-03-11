@@ -155,7 +155,7 @@ map:disease a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/disease";
-        rr:class ncit:C20;
+        rr:class icd:C20;
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100025;
