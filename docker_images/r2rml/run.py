@@ -6,10 +6,9 @@ import subprocess
 import sys
 from subprocess import Popen, PIPE
 
-if(os.path.exists("mapping.ttl")):
-    os.remove("mapping.ttl")
-if(os.path.exists("out.ttl")):
-    os.remove("out.ttl")
+if "--debug" not in sys.argv:
+    if(os.path.exists("mapping.ttl")):
+        os.remove("mapping.ttl")
 
 r2rmlEndpoint = sys.argv[1]
 outputEndpoint = sys.argv[2]
