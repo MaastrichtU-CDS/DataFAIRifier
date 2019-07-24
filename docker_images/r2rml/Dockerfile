@@ -20,6 +20,6 @@ RUN mkdir /config
 COPY run.py /run.py
 COPY run.sh /run.sh
 
-CMD ["sh", "run.sh"]
+CMD ["bash", "run.sh"]
 
 # docker build -t jvsoest/workflow2 ./
