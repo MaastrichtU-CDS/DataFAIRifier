@@ -9,13 +9,12 @@ services:
     ports:
       - "2345:5432"
   r2rml:
-    image: registry.gitlab.com/um-cds/fair/tools/r2rml:1.0
+    image: jvsoest/r2rml:1.0
     links:
       - postgres:dbhost
       - graphdb:graphdb
   garlic:
-    build:
-      context: notebooks
+    image: jvsoest/fair-jupyter
     ports:
       - "8888:8888"
       - "8088:8088"
