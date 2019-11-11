@@ -13,13 +13,13 @@ services:
     links:
       - postgres:dbhost
       - graphdb:graphdb
-  garlic:
+  notebook:
     image: jvsoest/fair-jupyter
     ports:
       - "8888:8888"
       - "8088:8088"
-    volumes:
-      - ./notebooks:/queries/
+    # volumes:
+    #   - ./notebooks:/queries/
     links:
       - postgres:postgresdb
       - graphdb:graphdb
