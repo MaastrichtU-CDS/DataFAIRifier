@@ -9,7 +9,7 @@ services:
     ports:
       - "2345:5432"
   r2rml:
-    image: jvsoest/r2rml:1.0
+    image: registry.gitlab.com/um-cds/fair/tools/r2rml:1.0
     links:
       - postgres:dbhost
       - graphdb:graphdb
