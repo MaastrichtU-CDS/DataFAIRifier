@@ -13,16 +13,21 @@ services:
     links:
       - postgres:dbhost
       - graphdb:graphdb
-  notebook:
-    image: jvsoest/fair-jupyter
+  fairifierbackend:
+    image: registry.gitlab.com/um-cds/fairsights/fairifier-backend:8-dockerize-fairifier
     ports:
-      - "8888:8888"
-      - "8088:8088"
-    # volumes:
-    #   - ./notebooks:/queries/
+      - "9090:9090"
+    depends_on:
+      - "graphdb"
     links:
-      - postgres:postgresdb
       - graphdb:graphdb
+      - postgres:postgres
+  fairifierfrontend:
+    image: registry.gitlab.com/um-cds/fairsights/fairifier-frontend:8-dockerize-fairifier
+    ports:
+      - "8080:80"
+    links:
+      - fairifierbackend:fairifierbackend
   graphdb:
     image: jvsoest/graphdb-free:fairstation
     ports: 
