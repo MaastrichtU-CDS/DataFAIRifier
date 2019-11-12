@@ -23,6 +23,11 @@ services:
     links:
       - graphdb:graphdb
       - postgres:postgres
+    # volumes:
+    #   # use this mount to overwrite the application.yml
+    #     - ./config:/app/fairifier-backend/config
+    #   # use this mount to persist logging files
+    #     - ./log:/app/fairifier-backend/log
   fairifierfrontend:
     image: registry.gitlab.com/um-cds/fairsights/fairifier-frontend:8-dockerize-fairifier
     ports:
