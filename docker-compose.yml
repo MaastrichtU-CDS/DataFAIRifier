@@ -19,6 +19,7 @@ services:
       - "9090:9090"
     depends_on:
       - "graphdb"
+    restart: always
     links:
       - graphdb:graphdb
       - postgres:postgres
