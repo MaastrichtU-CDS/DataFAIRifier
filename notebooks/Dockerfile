@@ -12,7 +12,7 @@ WORKDIR /root
 RUN mkdir -p /.jupyter/custom/
 COPY custom.js /.jupyter/custom/
 
-RUN mkdir /queries
+ADD ./ /queries
 WORKDIR /queries
 
 CMD gunicorn -c gunicorn_config.py grlc.server:app & jupyter notebook --port=8888 --ip=0.0.0.0 --allow-root --NotebookApp.token=''

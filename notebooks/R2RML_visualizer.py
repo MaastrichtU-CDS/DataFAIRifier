@@ -11,15 +11,7 @@ class R2RML_visualizer:
         self.rdfStore = None
         self.graph = None
         self.excludedLiteralPredicates = [ ]
-        self.namespaces = {
-            "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#": "ncit:",
-            "http://www.cancerdata.org/roo/": "roo:",
-            "http://mapping.local/": "map_",
-            "http://purl.obolibrary.org/obo/UO_": "UO:",
-            "http://www.w3.org/2001/XMLSchema#": "xsd:",
-            "http://www.w3.org/2000/01/rdf-schema#": "rdfs:",
-            "http://purl.bioontology.org/ontology/ICD10/": "icd:"
-        }
+        self.namespaces = { }
         if loadNamespaces is not None:
             self.namespaces = loadNamespaces
         
@@ -75,6 +67,17 @@ class R2RML_visualizer:
         return classString
     
     def plotGraph(self):
+        #load namespaces
+        self.namespaces = { }
+        for prefix, namespace in self.rmlStore.namespaces():
+            myPrefix = ""
+            # map needs to be an underscore, as it's an R2RML object
+            if prefix == "map":
+                myPrefix = str(prefix) + "_"
+            else:
+                myPrefix = str(prefix) + ":"
+            self.namespaces.update( {str(namespace): myPrefix} )
+        
         # create new graphviz canvas
         self.graph = Digraph(comment='R2RML Structure', format="png")
         self.graph.node_attr.update(color='lightblue2', style='filled')
