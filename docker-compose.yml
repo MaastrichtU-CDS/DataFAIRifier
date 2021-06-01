@@ -24,15 +24,14 @@ services:
       - postgres:postgresdb
       - graphdb:graphdb
   graphdb:
-    image: jvsoest/graphdb-free:fairstation
+    build:
+      context: ./graphdb
     ports: 
       - "7200:7200"
     environment:
       - GDB_HEAP_SIZE=2g
       - GDB_MIN_MEM=1g
       - GDB_MAX_MEM=2g
-    # volumes:
-    #   - ./graphdb_template/:/opt/graphdb/home/
 networks:
   default:
     driver: bridge
