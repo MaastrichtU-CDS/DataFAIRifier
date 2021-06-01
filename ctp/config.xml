@@ -1,0 +1,27 @@
+<Configuration>
+    <Server
+        maxThreads="20"
+        port="8081"/>
+    <Pipeline name="default">
+        <DicomImportService
+            class="org.rsna.ctp.stdstages.DicomImportService"
+            logConnections="all"
+            name="DicomImportService"
+            port="104"
+            quarantine="ctpData/default/quarantines/DicomImportService"
+            root="ctpData/default/roots/dicomImportService"/>
+        <DirectoryImportService
+            class="org.rsna.ctp.stdstages.DirectoryImportService"
+            import="ctpData/default/import"
+            name="Client Directory Import"
+            quarantine="ctpData/default/quarantines/directory-import"
+            root="ctpData/default/roots/directory-import"/>
+        <HttpExportService
+            class="org.rsna.ctp.stdstages.HttpExportService"
+            name="Export to RDF service"
+            quarantine="ctpData/default/quarantines/export-service"
+            root="ctpData/default/roots/export-service"
+            sendDigestHeader="yes"
+            url="http://lidicom:80/import"/>		
+    </Pipeline>
+</Configuration>	

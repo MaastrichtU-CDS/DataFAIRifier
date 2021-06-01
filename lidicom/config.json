@@ -1,0 +1,6 @@
+{
+    "default": {
+        "sparqlEndpointUrl": "http://graphdb:7200/repositories/data",
+        "graphNameJson": "http://lidicom.local/"
+    }
+}

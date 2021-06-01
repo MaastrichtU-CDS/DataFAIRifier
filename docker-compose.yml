@@ -32,6 +32,22 @@ services:
       - GDB_HEAP_SIZE=2g
       - GDB_MIN_MEM=1g
       - GDB_MAX_MEM=2g
+  ctp:
+    image: jvsoest/ctp
+    ports:
+      - "8081:8081"
+      - "104:104"
+    links:
+      - lidicom:lidicom
+    volumes:
+      - ./ctp/config.xml:/CTP/config.xml
+      - ./ctp/ctpConfig:/CTP/ctpConfig
+  lidicom:
+    image: registry.gitlab.com/um-cds/projects/covid-19/import-to-rdf:lidicom
+    links:
+      - graphdb:graphdb
+    volumes:
+      - ./lidicom/config.json:/app/config.json
 networks:
   default:
     driver: bridge
